@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.jrgc.banknu.controllers.client.tabs.MyAccountsController">
+    <padding>
+        <Insets topRightBottomLeft="20.0"/>
+    </padding>
+
+    <top>
+        <Label BorderPane.alignment="CENTER" textAlignment="CENTER" style="-fx-font-size: 15pt;" text="Minhas Contas"
+               textFill="#9F3EDE"/>
+    </top>
+
+    <center>
+        <Label BorderPane.alignment="CENTER" fx:id="emptyListText" text="Você não possui nenhuma conta.&#10;Crie uma agora!"
+               prefWidth="440" textAlignment="CENTER" style="-fx-font-size: 13pt;" textFill="#9F3EDE"/>
+    </center>
+
+    <left>
+        <VBox spacing="10">
+            <MenuButton text="Nova Conta">
+                <items>
+                    <MenuItem text="Conta Simples" onAction="#onSimpleAccountClick"/>
+                    <MenuItem text="Conta Especial" onAction="#onSpecialAccountClick"/>
+                    <MenuItem text="Conta Poupança" onAction="#onSavingsAccountClick"/>
+                </items>
+            </MenuButton>
+
+            <ListView fx:id="accountsListView" prefWidth="440"/>
+        </VBox>
+    </left>
+
+    <stylesheets>
+        <URL value="@../../styles/main.css"/>
+    </stylesheets>
+</BorderPane>

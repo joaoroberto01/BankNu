@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.jrgc.banknu.controllers.client.tabs.WithdrawController" alignment="TOP_CENTER">
+
+    <padding>
+        <Insets topRightBottomLeft="20.0"/>
+    </padding>
+
+    <Label textAlignment="CENTER" style="-fx-font-size: 15pt;" text="Saque" textFill="#9F3EDE"/>
+
+</VBox>

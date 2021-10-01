@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jrgc.banknu.controllers.client.tabs.HomeController">
+    <padding> <Insets topRightBottomLeft="20"/> </padding>
+    <top>
+        <Label BorderPane.alignment="CENTER" fx:id="welcomeText" textAlignment="CENTER" style="-fx-font-size: 15pt;" textFill="#9F3EDE"/>
+    </top>
+
+    <center>
+        <Label BorderPane.alignment="CENTER" text="Clique nas abas acima para navegar entre as funcionalidades"
+               textAlignment="CENTER" style="-fx-font-size: 13pt;" textFill="#9F3EDE"/>
+    </center>
+
+    <bottom>
+        <Button BorderPane.alignment="BOTTOM_RIGHT" styleClass="btn-outline" text="Alterar Senha" onAction="#onPasswordClick" alignment="BOTTOM_RIGHT" />
+    </bottom>
+</BorderPane>

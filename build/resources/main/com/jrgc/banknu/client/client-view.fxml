@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<TabPane fx:id="tabPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.jrgc.banknu.controllers.client.ClientController"
+         tabClosingPolicy="UNAVAILABLE">
+
+    <Tab text="Início">
+        <fx:include source="tabs/home-view.fxml"/>
+    </Tab>
+
+    <Tab text="Minhas Contas">
+        <fx:include source="tabs/myaccount-view.fxml"/>
+    </Tab>
+
+    <Tab text="Saque">
+        <fx:include source="tabs/withdraw-view.fxml"/>
+    </Tab>
+
+    <Tab text="Depósito">
+        <fx:include source="tabs/deposit-view.fxml"/>
+    </Tab>
+
+    <Tab text="Extrato">
+        <fx:include source="tabs/bankstatement-view.fxml"/>
+    </Tab>
+
+    <stylesheets>
+        <URL value="@../styles/main.css" />
+    </stylesheets>
+</TabPane>

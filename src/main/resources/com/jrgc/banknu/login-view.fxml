@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.PasswordField?>
+<?import java.net.URL?>
+<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.jrgc.banknu.controllers.LoginController" style="-fx-background-color: #830AD1">
+    <padding>
+        <Insets topRightBottomLeft="20.0"/>
+    </padding>
+
+    <Label styleClass="title" text="BankNU" textFill="white"/>
+
+    <TextField fx:id="userField" promptText="Usuário"/>
+    <PasswordField fx:id="passwordField"  promptText="Senha"/>
+
+    <Button text="Entrar" textFill="white" prefWidth="300.0" onAction="#onSignInButtonClick"/>
+    <Label fx:id="errorText" textFill="red"/>
+
+    <stylesheets>
+        <URL value="@styles/login.css" />
+    </stylesheets>
+</VBox>

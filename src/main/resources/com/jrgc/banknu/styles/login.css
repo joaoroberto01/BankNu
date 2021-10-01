@@ -1,0 +1,13 @@
+.title {
+    -fx-font-size: 20pt;
+    -fx-font-family: Helvetica;
+    -fx-font-weight: bolder;
+}
+
+.button {
+    -fx-background-color: darkorange;
+}
+
+.button:hover{
+    -fx-background-color: orangered;
+}

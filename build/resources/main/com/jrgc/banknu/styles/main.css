@@ -1,0 +1,45 @@
+.btn-outline {
+    -fx-border-width: 1.5;
+    -fx-border-color: #9F3EDE;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #9F3EDE;
+    -fx-font-weight: bold;
+}
+
+.btn-outline:hover {
+    -fx-background-color: #9F3EDE;
+    -fx-text-fill: white;
+    -fx-font-weight: bolder;
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+     -fx-border-width: 0;
+}
+
+.tab-pane .tab {
+    -fx-background-color: rgb(244, 244, 244);
+}
+
+.tab .tab-label {
+    -fx-font-family: Helvetica;
+    -fx-font-weight: bold;
+}
+
+.tab-pane .tab:selected{
+    -fx-background-color: #8f37c7;
+}
+.tab-pane .tab:selected .tab-label {
+    -fx-text-fill: white;
+    -fx-font-family: Helvetica;
+    -fx-font-weight: bold;
+}
+
+.tab-pane *.tab-header-background {
+    -fx-background-color: #9F3EDE;
+}
+
+.list-view {
+    -fx-selection-bar: #9F3EDE;
+}
