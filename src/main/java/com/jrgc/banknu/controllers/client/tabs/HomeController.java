@@ -5,9 +5,9 @@ import com.jrgc.banknu.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TabPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -34,5 +34,13 @@ public class HomeController {
         }catch (IOException e){
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    protected void onLogoutClick(ActionEvent actionEvent){
+        Node node = (Node) actionEvent.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+
+        BankApplication.goToLoginScene(stage);
     }
 }

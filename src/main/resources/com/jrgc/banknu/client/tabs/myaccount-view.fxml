@@ -28,9 +28,9 @@
         <VBox spacing="10">
             <MenuButton text="Nova Conta">
                 <items>
-                    <MenuItem text="Conta Simples" onAction="#onSimpleAccountClick"/>
-                    <MenuItem text="Conta Especial" onAction="#onSpecialAccountClick"/>
-                    <MenuItem text="Conta Poupança" onAction="#onSavingsAccountClick"/>
+                    <MenuItem text="Conta Simples" fx:id="menuSimple" onAction="#onSimpleAccountClick"/>
+                    <MenuItem text="Conta Especial" fx:id="menuSpecial" onAction="#onSpecialAccountClick"/>
+                    <MenuItem text="Conta Poupança" fx:id="menuSavings" onAction="#onSavingsAccountClick"/>
                 </items>
             </MenuButton>
 

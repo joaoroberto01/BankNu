@@ -18,12 +18,12 @@
         <fx:include source="tabs/myaccount-view.fxml"/>
     </Tab>
 
-    <Tab text="Saque">
-        <fx:include source="tabs/withdraw-view.fxml"/>
+    <Tab text="Saque" onSelectionChanged="#refresh">
+        <fx:include fx:id="withdraw" source="tabs/withdraw-view.fxml"/>
     </Tab>
 
-    <Tab text="Depósito">
-        <fx:include source="tabs/deposit-view.fxml"/>
+    <Tab text="Depósito" onSelectionChanged="#refresh">
+        <fx:include fx:id="deposit" source="tabs/deposit-view.fxml"/>
     </Tab>
 
     <Tab text="Extrato">

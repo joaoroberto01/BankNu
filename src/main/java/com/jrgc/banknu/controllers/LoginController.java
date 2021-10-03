@@ -31,7 +31,7 @@ public class LoginController {
         String inputPassword = EncryptUtils.toSHA1(passwordField.getText());
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader("auth.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("auth.bn"));
 
             email = br.readLine();
             password = br.readLine();

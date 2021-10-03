@@ -16,6 +16,9 @@
     </center>
 
     <bottom>
-        <Button BorderPane.alignment="BOTTOM_RIGHT" styleClass="btn-outline" text="Alterar Senha" onAction="#onPasswordClick" alignment="BOTTOM_RIGHT" />
+        <VBox spacing="8" alignment="BOTTOM_RIGHT">
+            <Button styleClass="btn-outline" text="Alterar Senha" onAction="#onPasswordClick" />
+            <Button styleClass="btn-outline" text="Logout" onAction="#onLogoutClick" />
+        </VBox>
     </bottom>
 </BorderPane>

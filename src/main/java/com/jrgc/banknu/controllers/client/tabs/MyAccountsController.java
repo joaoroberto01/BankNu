@@ -1,16 +1,27 @@
 package com.jrgc.banknu.controllers.client.tabs;
 
+import com.jrgc.banknu.controllers.client.ClientController;
 import com.jrgc.banknu.models.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 
 public class MyAccountsController {
+    private static final int SIMPLE_MAX = 1;
+    private static final int SAVINGS_MAX = 2;
+    private static final int SPECIAL_MAX = 3;
+
     @FXML
-    private ListView<BankAccount> accountsListView;
+    public ListView<BankAccount> accountsListView;
+
+    @FXML
+    private MenuItem menuSimple, menuSpecial, menuSavings;
 
     @FXML
     private Label emptyListText;
+
+    private int simpleCount, specialCount, savingsCount;
 
     @FXML
     public void initialize(){
@@ -28,16 +39,28 @@ public class MyAccountsController {
     @FXML
     public void onSimpleAccountClick(){
         openNewAccount(AccountType.SIMPLE);
+        simpleCount++;
+
+        if (simpleCount == SIMPLE_MAX)
+            menuSimple.setDisable(true);
     }
 
     @FXML
     public void onSpecialAccountClick(){
         openNewAccount(AccountType.SPECIAL);
+        specialCount++;
+
+        if (specialCount == SPECIAL_MAX)
+            menuSpecial.setDisable(true);
     }
 
     @FXML
     public void onSavingsAccountClick(){
         openNewAccount(AccountType.SAVINGS);
+        savingsCount++;
+
+        if (savingsCount == SAVINGS_MAX)
+            menuSavings.setDisable(true);
     }
 
     private void openNewAccount(AccountType accountType){
@@ -60,6 +83,7 @@ public class MyAccountsController {
             case SAVINGS -> new SavingsBankAccount();
         };
 
+        ClientController.bankAccounts.add(account);
         accountsListView.getItems().add(account);
         accountsListView.refresh();
         checkListVisibility();

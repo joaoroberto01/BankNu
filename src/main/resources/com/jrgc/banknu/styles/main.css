@@ -1,3 +1,15 @@
+.button {
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: #9F3EDE;
+    -fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: #8422c4;
+    -fx-border-color: #8422c4
+}
+
 .btn-outline {
     -fx-border-width: 1.5;
     -fx-border-color: #9F3EDE;
@@ -5,13 +17,12 @@
     -fx-background-radius: 5px;
     -fx-background-color: transparent;
     -fx-text-fill: #9F3EDE;
-    -fx-font-weight: bold;
 }
 
 .btn-outline:hover {
     -fx-background-color: #9F3EDE;
+    -fx-border-color: #9F3EDE;
     -fx-text-fill: white;
-    -fx-font-weight: bolder;
 }
 
 .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
@@ -42,4 +53,8 @@
 
 .list-view {
     -fx-selection-bar: #9F3EDE;
+}
+
+.menu-button > .arrow-button > .arrow {
+    -fx-background-color: transparent;
 }

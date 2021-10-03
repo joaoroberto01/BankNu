@@ -15,4 +15,6 @@ module com.jrgc.banknu {
     opens com.jrgc.banknu.controllers.manager to javafx.fxml;
     exports com.jrgc.banknu.controllers.client.tabs;
     opens com.jrgc.banknu.controllers.client.tabs to javafx.fxml;
+    exports com.jrgc.banknu.uicomponents;
+    opens com.jrgc.banknu.uicomponents to javafx.fxml;
 }
