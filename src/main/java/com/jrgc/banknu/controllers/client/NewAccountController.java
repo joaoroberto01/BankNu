@@ -8,13 +8,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
 public class NewAccountController {
-    private AccountType accountType;
+    private BankAccount.AccountType accountType;
     private ListView<BankAccount> listView;
 
     @FXML
     private Button btnFinish;
 
-    public NewAccountController(AccountType accountType, ListView<BankAccount> listView) {
+    public NewAccountController(BankAccount.AccountType accountType, ListView<BankAccount> listView) {
         this.listView = listView;
         this.accountType = accountType;
     }

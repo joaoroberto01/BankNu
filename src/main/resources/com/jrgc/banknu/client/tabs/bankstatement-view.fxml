@@ -7,12 +7,33 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<VBox xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.jrgc.banknu.controllers.client.tabs.BankStatementController" alignment="TOP_CENTER">
+<?import java.net.URL?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.jrgc.banknu.controllers.client.tabs.BankStatementController">
 
-    <padding>
-        <Insets topRightBottomLeft="20.0"/>
-    </padding>
+        <padding>
+            <Insets topRightBottomLeft="20.0"/>
+        </padding>
 
-    <Label textAlignment="CENTER" style="-fx-font-size: 15pt;" text="Extrato" textFill="#9F3EDE"/>
-</VBox>
+        <top>
+            <Label BorderPane.alignment="CENTER" textAlignment="CENTER" style="-fx-font-size: 15pt;" text="Extrato"
+                   textFill="#9F3EDE"/>
+        </top>
+
+        <center>
+            <TableView fx:id="bankStatementTableView" prefWidth="440">
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                </columnResizePolicy>
+                <columns>
+                    <TableColumn fx:id="dateColumn" text="Data" resizable="false" reorderable="false" sortable="false"/>
+                    <TableColumn fx:id="operationCol" text="Operação" minWidth="60" reorderable="false" sortable="false"/>
+                    <TableColumn fx:id="amountCol" text="Valor" minWidth="160" reorderable="false" sortable="false"/>
+                </columns>
+            </TableView>
+        </center>
+
+        <stylesheets>
+            <URL value="@../../styles/main.css"/>
+        </stylesheets>
+    </BorderPane>

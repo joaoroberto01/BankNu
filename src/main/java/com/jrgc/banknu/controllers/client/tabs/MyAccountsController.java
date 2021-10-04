@@ -36,9 +36,15 @@ public class MyAccountsController {
         emptyListText.setManaged(emptyAccounts);
     }
 
+    public void onRefresh() {
+        accountsListView.getItems().clear();
+        accountsListView.getItems().addAll(ClientController.bankAccounts);
+        accountsListView.getSelectionModel().selectFirst();
+    }
+
     @FXML
     public void onSimpleAccountClick(){
-        openNewAccount(AccountType.SIMPLE);
+        openNewAccount(BankAccount.AccountType.SIMPLE);
         simpleCount++;
 
         if (simpleCount == SIMPLE_MAX)
@@ -47,7 +53,7 @@ public class MyAccountsController {
 
     @FXML
     public void onSpecialAccountClick(){
-        openNewAccount(AccountType.SPECIAL);
+        openNewAccount(BankAccount.AccountType.SPECIAL);
         specialCount++;
 
         if (specialCount == SPECIAL_MAX)
@@ -56,14 +62,14 @@ public class MyAccountsController {
 
     @FXML
     public void onSavingsAccountClick(){
-        openNewAccount(AccountType.SAVINGS);
+        openNewAccount(BankAccount.AccountType.SAVINGS);
         savingsCount++;
 
         if (savingsCount == SAVINGS_MAX)
             menuSavings.setDisable(true);
     }
 
-    private void openNewAccount(AccountType accountType){
+    private void openNewAccount(BankAccount.AccountType accountType){
 //        try {
 //            FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource("client/new-account-view.fxml"));
 //            NewAccountController newAccountController = new NewAccountController(accountType, accountsListView);
@@ -85,7 +91,6 @@ public class MyAccountsController {
 
         ClientController.bankAccounts.add(account);
         accountsListView.getItems().add(account);
-        accountsListView.refresh();
         checkListVisibility();
     }
 }

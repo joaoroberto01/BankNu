@@ -5,6 +5,20 @@ import com.jrgc.banknu.exceptions.BalanceException;
 import java.util.Random;
 
 public abstract class BankAccount {
+
+    public enum AccountType {
+        SIMPLE, SPECIAL, SAVINGS;
+
+        @Override
+        public String toString() {
+            return switch (this) {
+                case SIMPLE -> "Conta Simples";
+                case SPECIAL -> "Conta Especial";
+                case SAVINGS -> "Conta Poupança";
+            };
+        }
+    }
+
     private final int number;
     private float balance;
     private final AccountType accountType;
@@ -33,7 +47,7 @@ public abstract class BankAccount {
 
     @Override
     public String toString() {
-        return accountType + " - " + number;
+        return String.format("%s - %s\nSaldo: %.2f", accountType, number, balance);
     }
 
     public abstract void withdraw(float amount) throws BalanceException;

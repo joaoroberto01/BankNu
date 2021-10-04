@@ -1,6 +1,8 @@
 package com.jrgc.banknu.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Utils {
     public static String getGreeting(){
@@ -12,5 +14,10 @@ public class Utils {
             return "Boa tarde";
 
         return "Bom dia";
+    }
+
+    public static String getCurrentDate(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        return simpleDateFormat.format(new Date());
     }
 }

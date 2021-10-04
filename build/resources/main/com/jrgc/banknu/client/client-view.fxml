@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import java.net.URL?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tab?>
@@ -14,20 +10,20 @@
         <fx:include source="tabs/home-view.fxml"/>
     </Tab>
 
-    <Tab text="Minhas Contas">
-        <fx:include source="tabs/myaccount-view.fxml"/>
+    <Tab text="Minhas Contas" onSelectionChanged="#onTabRefresh">
+        <fx:include fx:id="myAccounts" source="tabs/myaccount-view.fxml"/>
     </Tab>
 
-    <Tab text="Saque" onSelectionChanged="#refresh">
+    <Tab text="Saque" onSelectionChanged="#onTabRefresh">
         <fx:include fx:id="withdraw" source="tabs/withdraw-view.fxml"/>
     </Tab>
 
-    <Tab text="Depósito" onSelectionChanged="#refresh">
+    <Tab text="Depósito" onSelectionChanged="#onTabRefresh">
         <fx:include fx:id="deposit" source="tabs/deposit-view.fxml"/>
     </Tab>
 
-    <Tab text="Extrato">
-        <fx:include source="tabs/bankstatement-view.fxml"/>
+    <Tab text="Extrato" onSelectionChanged="#onTabRefresh">
+        <fx:include fx:id="bankStatement" source="tabs/bankstatement-view.fxml"/>
     </Tab>
 
     <stylesheets>

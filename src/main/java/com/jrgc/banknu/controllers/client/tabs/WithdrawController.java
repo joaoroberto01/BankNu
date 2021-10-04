@@ -1,6 +1,7 @@
 package com.jrgc.banknu.controllers.client.tabs;
 
 import com.jrgc.banknu.exceptions.BalanceException;
+import com.jrgc.banknu.models.BankStatementItem;
 import com.jrgc.banknu.uicomponents.CurrencyField;
 import com.jrgc.banknu.controllers.client.ClientController;
 import com.jrgc.banknu.models.BankAccount;
@@ -24,10 +25,23 @@ public class WithdrawController {
     @FXML
     public void onWithdrawClick(){
         try {
-            int index = accountsChoiceBox.getSelectionModel().getSelectedIndex();
-            //String warning = index == -1 ? "Selecione uma conta" : "";
+            float amount = moneyTextField.getAmount().floatValue();
 
-            ClientController.bankAccounts.get(index).withdraw(moneyTextField.getAmount().floatValue());
+            if (amount == 0) {
+                AlertUtils.showWarning("Insira um valor maior que R$0,00");
+                return;
+            }
+
+            int index = accountsChoiceBox.getSelectionModel().getSelectedIndex();
+
+            BankAccount bankAccount = ClientController.bankAccounts.get(index);
+            bankAccount.withdraw(amount);
+
+            BankStatementItem item = new BankStatementItem(bankAccount.getNumber(), amount, BankStatementItem.BankOperation.WITHDRAW);
+            ClientController.bankStatement.add(item);
+
+            accountsChoiceBox.getItems().set(index, ClientController.bankAccounts.get(index));
+            accountsChoiceBox.getSelectionModel().select(index);
 
             AlertUtils.showInformation("Saque efetuado com sucesso!");
         } catch (BalanceException balanceException) {
@@ -37,9 +51,10 @@ public class WithdrawController {
         }
     }
 
-    public void updateAccounts() {
-        for (BankAccount b : ClientController.bankAccounts)
-            if (!accountsChoiceBox.getItems().contains(b))
-                accountsChoiceBox.getItems().add(b);
+    public void onRefresh() {
+        accountsChoiceBox.getItems().setAll(ClientController.bankAccounts);
+        accountsChoiceBox.getSelectionModel().selectFirst();
+
+        moneyTextField.setAmount(0.0);
     }
 }
