@@ -11,7 +11,8 @@ import java.util.List;
 
 public class BankApplication extends javafx.application.Application {
 
-    //public static List<BankUser> bankUsers = new ArrayList<>();
+    public static List<BankUser> bankUsers = new ArrayList<>();
+    public static BankUser currentUser;
 
     @Override
     public void start(Stage stage) throws IOException {

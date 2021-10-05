@@ -8,18 +8,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.PasswordField?>
 <?import java.net.URL?>
+<?import javafx.scene.text.Text?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.jrgc.banknu.controllers.LoginController" style="-fx-background-color: #830AD1">
     <padding>
         <Insets topRightBottomLeft="20.0"/>
     </padding>
 
-    <Label styleClass="title" text="BankNU" textFill="white"/>
+    <Text styleClass="title" text="BankNU" style="-fx-fill: white"/>
 
-    <TextField fx:id="userField" promptText="Usuário"/>
-    <PasswordField fx:id="passwordField"  promptText="Senha"/>
+    <TextField fx:id="userField" promptText="Usuário" onAction="#onSignIn"/>
+    <PasswordField fx:id="passwordField" promptText="Senha" onAction="#onSignIn"/>
 
-    <Button text="Entrar" textFill="white" prefWidth="300.0" onAction="#onSignInButtonClick"/>
+    <Button text="Entrar" textFill="white" prefWidth="300.0" onAction="#onSignIn"/>
     <Label fx:id="errorText" textFill="red"/>
 
     <stylesheets>

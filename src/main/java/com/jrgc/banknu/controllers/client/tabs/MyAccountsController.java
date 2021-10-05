@@ -27,6 +27,8 @@ public class MyAccountsController {
     public void initialize(){
         System.out.println("MyAccount initialize");
 
+        accountsListView.setMouseTransparent(true);
+        accountsListView.setFocusTraversable(false);
         checkListVisibility();
     }
 
@@ -37,9 +39,7 @@ public class MyAccountsController {
     }
 
     public void onRefresh() {
-        accountsListView.getItems().clear();
-        accountsListView.getItems().addAll(ClientController.bankAccounts);
-        accountsListView.getSelectionModel().selectFirst();
+        accountsListView.getItems().setAll(ClientController.bankAccounts);
     }
 
     @FXML

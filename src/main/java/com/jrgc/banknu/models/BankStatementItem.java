@@ -2,10 +2,6 @@ package com.jrgc.banknu.models;
 
 import com.jrgc.banknu.utils.Utils;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 public class BankStatementItem {
     public enum BankOperation {
         WITHDRAW, DEPOSIT;
@@ -22,13 +18,13 @@ public class BankStatementItem {
     private final int accountNumber;
     private final float amount;
     private final BankOperation operation;
-    private final String date;
+    private final String dateTime;
 
     public BankStatementItem(int accountNumber, float amount, BankOperation operation) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.operation = operation;
-        date = Utils.getCurrentDate();
+        dateTime = Utils.getCurrentDateTime();
     }
 
     public int getAccountNumber() {
@@ -43,7 +39,7 @@ public class BankStatementItem {
         return operation;
     }
 
-    public String getDate() {
-        return date;
+    public String getDateTime() {
+        return dateTime;
     }
 }

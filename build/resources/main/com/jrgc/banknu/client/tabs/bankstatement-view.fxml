@@ -8,32 +8,48 @@
 
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
+<?import javafx.scene.text.Text?>
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.jrgc.banknu.controllers.client.tabs.BankStatementController">
+            fx:controller="com.jrgc.banknu.controllers.client.tabs.BankStatementController">
 
-        <padding>
-            <Insets topRightBottomLeft="20.0"/>
-        </padding>
+    <padding>
+        <Insets topRightBottomLeft="20.0"/>
+    </padding>
 
-        <top>
-            <Label BorderPane.alignment="CENTER" textAlignment="CENTER" style="-fx-font-size: 15pt;" text="Extrato"
-                   textFill="#9F3EDE"/>
-        </top>
+    <top>
+        <Label BorderPane.alignment="CENTER" textAlignment="CENTER" style="-fx-font-size: 15pt;" text="Extrato"
+               textFill="#9F3EDE"/>
+    </top>
 
-        <center>
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20"/>
+            </padding>
+
+            <VBox spacing="8">
+                <Label text="Selecione uma conta:"/>
+                <ChoiceBox fx:id="accountsChoiceBox" onAction="#onSelectChoice"/>
+            </VBox>
+
             <TableView fx:id="bankStatementTableView" prefWidth="440">
                 <columnResizePolicy>
-                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
                 <columns>
-                    <TableColumn fx:id="dateColumn" text="Data" resizable="false" reorderable="false" sortable="false"/>
+                    <TableColumn fx:id="dateColumn" text="Data e Hora" minWidth="60" reorderable="false" sortable="false"/>
                     <TableColumn fx:id="operationCol" text="Operação" minWidth="60" reorderable="false" sortable="false"/>
                     <TableColumn fx:id="amountCol" text="Valor" minWidth="160" reorderable="false" sortable="false"/>
                 </columns>
             </TableView>
-        </center>
 
-        <stylesheets>
-            <URL value="@../../styles/main.css"/>
-        </stylesheets>
-    </BorderPane>
+            <HBox alignment="CENTER_RIGHT">
+                <Text fx:id="balanceText" styleClass="balance-label"  />
+            </HBox>
+        </VBox>
+    </center>
+
+    <stylesheets>
+        <URL value="@../../styles/main.css"/>
+    </stylesheets>
+</BorderPane>

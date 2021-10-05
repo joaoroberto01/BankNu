@@ -1,5 +1,7 @@
 package com.jrgc.banknu.models;
 
-public class Client {
+import com.google.gson.Gson;
+
+public class Client extends BankUser {
 
 }

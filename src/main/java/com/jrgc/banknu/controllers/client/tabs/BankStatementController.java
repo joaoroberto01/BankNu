@@ -1,19 +1,19 @@
 package com.jrgc.banknu.controllers.client.tabs;
 
 import com.jrgc.banknu.controllers.client.ClientController;
+import com.jrgc.banknu.models.BankAccount;
 import com.jrgc.banknu.models.BankStatementItem;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
-import javafx.scene.text.TextAlignment;
+import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 import java.text.NumberFormat;
@@ -37,16 +37,59 @@ public class BankStatementController {
     public TableColumn<BankStatementItem, Float> amountCol;
 
     @FXML
+    public ChoiceBox<BankAccount> accountsChoiceBox;
+
+    @FXML
+    public Text balanceText;
+
+    private BankAccount selectedAccount;
+
+    @FXML
     public void initialize(){
         System.out.println("BankStatement initialize");
         setupColumns();
+        bankStatementTableView.setSelectionModel(null);
+    }
+
+    public void onRefresh() {
+        ObservableList<BankAccount> bankAccounts = accountsChoiceBox.getItems();
+        bankAccounts.setAll(ClientController.bankAccounts);
+        if (bankAccounts.size() != 0) {
+            int index = bankAccounts.indexOf(selectedAccount);
+            index = index == -1 ? 0 : index;
+            accountsChoiceBox.getSelectionModel().select(index);
+        }
+        updateTable();
+    }
+
+    public void onSelectChoice() {
+        if (accountsChoiceBox.getValue() == null)
+            return;
+
+        selectedAccount = accountsChoiceBox.getValue();
+
+        updateTable();
+    }
+
+    private void updateTable() {
+        if (selectedAccount == null)
+            return;
+        bankStatementTableView.getItems().setAll(ClientController.bankStatement.filtered(new Predicate<BankStatementItem>() {
+            @Override
+            public boolean test(BankStatementItem bankStatementItem) {
+                return bankStatementItem.getAccountNumber() == selectedAccount.getNumber();
+            }
+        }));
+
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        balanceText.setText("Saldo: " + numberFormat.format(selectedAccount.getBalance()));
     }
 
     private void setupColumns() {
         dateColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<BankStatementItem, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<BankStatementItem, String> param) {
-                return new SimpleStringProperty(param.getValue().getDate());
+                return new SimpleStringProperty(param.getValue().getDateTime());
             }
         });
 
@@ -94,17 +137,5 @@ public class BankStatementController {
                 };
             }
         });
-    }
-
-    public void onRefresh() {
-
-        bankStatementTableView.getItems().setAll(ClientController.bankStatement.filtered(new Predicate<BankStatementItem>() {
-            @Override
-            public boolean test(BankStatementItem bankStatementItem) {
-                return true;
-            }
-        }));
-        for (BankStatementItem b : ClientController.bankStatement)
-            System.out.println(b.getOperation());
     }
 }

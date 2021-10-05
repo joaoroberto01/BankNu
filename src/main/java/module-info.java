@@ -1,7 +1,10 @@
 module com.jrgc.banknu {
     requires javafx.controls;
     requires javafx.fxml;
+    requires com.google.gson;
 
+    opens com.jrgc.banknu.models to com.google.gson;
+    exports com.jrgc.banknu.models;
 
     opens com.jrgc.banknu to javafx.fxml;
     exports com.jrgc.banknu;

@@ -16,8 +16,8 @@ public class Utils {
         return "Bom dia";
     }
 
-    public static String getCurrentDate(){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    public static String getCurrentDateTime(){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return simpleDateFormat.format(new Date());
     }
 }

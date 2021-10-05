@@ -1,6 +1,7 @@
 package com.jrgc.banknu.controllers;
 
 import com.jrgc.banknu.BankApplication;
+import com.jrgc.banknu.models.BankUser;
 import com.jrgc.banknu.utils.EncryptUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,9 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.List;
 
 public class LoginController {
     @FXML
@@ -24,38 +28,63 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
-    protected void onSignInButtonClick(ActionEvent event) {
-        boolean success = false;
-        String email = null, password = null;
-        String inputEmail = EncryptUtils.toSHA1(userField.getText());
+    protected void onSignIn(ActionEvent event) {
+        boolean success;
+        String inputUsername = EncryptUtils.toSHA1(userField.getText());
         String inputPassword = EncryptUtils.toSHA1(passwordField.getText());
 
         try {
             BufferedReader br = new BufferedReader(new FileReader("auth.bn"));
 
-            email = br.readLine();
-            password = br.readLine();
+            String line, read = "";
+            while ((line = br.readLine()) != null)
+                read = read.concat(line);
 
             br.close();
+
+            byte[] decoded = Base64.getDecoder().decode(read);
+            String json = new String(decoded, StandardCharsets.UTF_8);
+
+            List<BankUser> bankUsers = BankUser.listFrom(json);
+
+            for (BankUser bankUser : bankUsers){
+                System.out.println(bankUser.getUsername());
+                System.out.println(bankUser.getPassword());
+                System.out.println(bankUser.getUsertype());
+
+                success = bankUser.auth(inputUsername, inputPassword);
+                if (success){
+                    BankApplication.currentUser = bankUser;
+                    break;
+                }
+            }
+
+            for (BankUser bankUser : bankUsers)
+                if (!BankApplication.bankUsers.contains(bankUser))
+                    BankApplication.bankUsers.add(bankUser);
         } catch (IOException e){
             e.printStackTrace();
         }
 
-        if (email != null && password != null)
-            success = inputEmail.equals(email) && inputPassword.equals(password);
-
-        if (!success)
+        if (BankApplication.currentUser == null)
             errorText.setText("Email ou senha inválidos");
         else{
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
 
+            BankUser.UserType userType = BankApplication.currentUser.getUsertype();
+
+            String view = switch (userType){
+                case CLIENT -> "client/client-view.fxml";
+                case MANAGER -> "";
+            };
+
             try {
-                FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource("client/client-view.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource(view));
                 Scene scene = new Scene(fxmlLoader.load(), 480, 480);
 
                 stage.setScene(scene);
-                stage.setTitle("Acesso Cliente");
+                stage.setTitle("Acesso " + userType);
             }catch (IOException e){
                 e.printStackTrace();
             }

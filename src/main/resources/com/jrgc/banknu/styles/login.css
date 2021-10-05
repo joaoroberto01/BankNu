@@ -1,6 +1,6 @@
 .title {
     -fx-font-size: 20pt;
-    -fx-font-family: Helvetica;
+    -fx-font-family: Roboto;
     -fx-font-weight: bolder;
 }
 
@@ -10,4 +10,5 @@
 
 .button:hover{
     -fx-background-color: orangered;
+    -fx-cursor: hand;
 }

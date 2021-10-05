@@ -22,7 +22,7 @@ public class HomeController {
     }
 
     @FXML
-    protected void onPasswordClick(ActionEvent actionEvent){
+    protected void onPasswordClick(){
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource("client/change-password-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 320, 250);
@@ -38,6 +38,8 @@ public class HomeController {
 
     @FXML
     protected void onLogoutClick(ActionEvent actionEvent){
+        BankApplication.currentUser = null;
+
         Node node = (Node) actionEvent.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
 
