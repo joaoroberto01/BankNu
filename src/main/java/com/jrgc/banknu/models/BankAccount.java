@@ -2,6 +2,8 @@ package com.jrgc.banknu.models;
 
 import com.jrgc.banknu.exceptions.BalanceException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public abstract class BankAccount {
@@ -22,6 +24,7 @@ public abstract class BankAccount {
     private final int number;
     private float balance;
     private final AccountType accountType;
+    private final List<BankStatementItem> bankStatement = new ArrayList<>();
 
     public BankAccount(AccountType accountType) {
         this.number = new Random().nextInt(99999);
@@ -43,6 +46,10 @@ public abstract class BankAccount {
 
     public void deposit(float amount){
         balance += amount;
+    }
+
+    public List<BankStatementItem> getBankStatement() {
+        return bankStatement;
     }
 
     @Override

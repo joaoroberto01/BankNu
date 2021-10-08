@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.jrgc.banknu.controllers.manager.tabs.MyClientsController">
+    <padding>
+        <Insets topRightBottomLeft="20.0"/>
+    </padding>
+
+    <top>
+        <Label BorderPane.alignment="CENTER" textAlignment="CENTER" styleClass="title" text="Meus Clientes"/>
+    </top>
+
+    <center>
+        <VBox>
+            <padding>
+                <Insets topRightBottomLeft="20" />
+            </padding>
+            <ScrollPane fitToHeight="true" fitToWidth="true">
+                <VBox>
+                    <HBox alignment="CENTER">
+                        <Label fx:id="emptyListText" textAlignment="CENTER" text="Você não possui nenhum cliente."
+                               styleClass="title"/>
+                    </HBox>
+                    <Accordion fx:id="clientsAccordion" prefWidth="440"/>
+                </VBox>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+    <stylesheets>
+        <URL value="@../../styles/main.css"/>
+    </stylesheets>
+</BorderPane>

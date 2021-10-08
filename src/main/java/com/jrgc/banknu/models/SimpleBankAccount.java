@@ -12,7 +12,6 @@ public class SimpleBankAccount extends BankAccount {
         super(accountType);
     }
 
-    @Override
     public void withdraw(float amount) throws BalanceException {
         if (getBalance() >= amount)
             setBalance(getBalance() - amount);

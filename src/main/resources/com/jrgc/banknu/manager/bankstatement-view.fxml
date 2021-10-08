@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+<?import java.net.URL?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.jrgc.banknu.controllers.manager.BankStatementController">
+
+    <padding>
+        <Insets topRightBottomLeft="20.0"/>
+    </padding>
+
+    <top>
+        <Label BorderPane.alignment="CENTER" fx:id="titleLabel" textAlignment="CENTER" styleClass="title" />
+    </top>
+
+    <center>
+        <VBox spacing="10">
+            <padding>
+                <Insets top="20"/>
+            </padding>
+
+            <TableView fx:id="bankStatementTableView" prefWidth="440">
+                <columnResizePolicy>
+                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                </columnResizePolicy>
+                <columns>
+                    <TableColumn fx:id="dateColumn" text="Data e Hora" minWidth="60" reorderable="false" sortable="false"/>
+                    <TableColumn fx:id="operationCol" text="Operação" minWidth="60" reorderable="false" sortable="false"/>
+                    <TableColumn fx:id="amountCol" text="Valor" minWidth="160" reorderable="false" sortable="false"/>
+                </columns>
+            </TableView>
+
+            <HBox alignment="CENTER_RIGHT">
+                <Text fx:id="balanceText" styleClass="balance-label"  />
+            </HBox>
+        </VBox>
+    </center>
+
+    <stylesheets>
+        <URL value="@../styles/main.css"/>
+    </stylesheets>
+</BorderPane>

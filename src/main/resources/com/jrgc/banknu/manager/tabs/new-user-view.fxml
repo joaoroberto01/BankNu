@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.jrgc.banknu.controllers.manager.NewUserController">
+
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <center>
+        <VBox spacing="20">
+            <VBox spacing="8">
+                <Label text="Nome de Usuário:" BorderPane.alignment="CENTER_LEFT"/>
+                <TextField fx:id="usernameTextField" promptText="Nome de Usuário"/>
+            </VBox>
+
+            <VBox spacing="8">
+                <Label text="Senha:" BorderPane.alignment="CENTER_LEFT"/>
+                <PasswordField fx:id="passwordTextField" promptText="Senha"/>
+            </VBox>
+
+            <Button text="Cadastrar" onAction="#newUser" prefWidth="300" />
+
+            <Label fx:id="errorText" textFill="red"/>
+        </VBox>
+    </center>
+</BorderPane>

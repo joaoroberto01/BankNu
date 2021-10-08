@@ -1,8 +1,10 @@
 package com.jrgc.banknu.controllers.client.tabs;
 
+import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.controllers.client.ClientController;
 import com.jrgc.banknu.models.BankAccount;
 import com.jrgc.banknu.models.BankStatementItem;
+import com.jrgc.banknu.models.Client;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -22,8 +24,6 @@ import java.util.function.Predicate;
 
 public class BankStatementController {
 
-//    @FXML
-//    public ListView<BankStatementItem> bankStatementListView;
     @FXML
     public TableView<BankStatementItem> bankStatementTableView;
 
@@ -42,18 +42,20 @@ public class BankStatementController {
     @FXML
     public Text balanceText;
 
+    private Client currentClient;
     private BankAccount selectedAccount;
 
     @FXML
     public void initialize(){
         System.out.println("BankStatement initialize");
+        currentClient = (Client) BankApplication.currentUser;
         setupColumns();
         bankStatementTableView.setSelectionModel(null);
     }
 
     public void onRefresh() {
         ObservableList<BankAccount> bankAccounts = accountsChoiceBox.getItems();
-        bankAccounts.setAll(ClientController.bankAccounts);
+        bankAccounts.setAll(currentClient.getBankAccounts());
         if (bankAccounts.size() != 0) {
             int index = bankAccounts.indexOf(selectedAccount);
             index = index == -1 ? 0 : index;
@@ -74,12 +76,7 @@ public class BankStatementController {
     private void updateTable() {
         if (selectedAccount == null)
             return;
-        bankStatementTableView.getItems().setAll(ClientController.bankStatement.filtered(new Predicate<BankStatementItem>() {
-            @Override
-            public boolean test(BankStatementItem bankStatementItem) {
-                return bankStatementItem.getAccountNumber() == selectedAccount.getNumber();
-            }
-        }));
+        bankStatementTableView.getItems().setAll(selectedAccount.getBankStatement());
 
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
         balanceText.setText("Saldo: " + numberFormat.format(selectedAccount.getBalance()));

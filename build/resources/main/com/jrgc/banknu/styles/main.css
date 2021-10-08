@@ -1,3 +1,8 @@
+.title {
+    -fx-font-size: 15pt;
+    -fx-text-fill: #9F3EDE;
+}
+
 .button {
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
@@ -63,4 +68,12 @@
     -fx-font-size: 12pt;
     -fx-font-weight: bolder;
     -fx-fill: green;
+}
+
+.titled-pane > .title {
+    -fx-font-size: 10pt;
+}
+
+.accordion .titled-pane > *.content{
+    -fx-background-color: transparent;
 }

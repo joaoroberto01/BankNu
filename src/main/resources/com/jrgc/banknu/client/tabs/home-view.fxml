@@ -7,7 +7,7 @@
 <BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jrgc.banknu.controllers.client.tabs.HomeController">
     <padding> <Insets topRightBottomLeft="20"/> </padding>
     <top>
-        <Label BorderPane.alignment="CENTER" fx:id="welcomeText" textAlignment="CENTER" style="-fx-font-size: 15pt;" textFill="#9F3EDE"/>
+        <Label BorderPane.alignment="CENTER" fx:id="welcomeText" textAlignment="CENTER" styleClass="title"/>
     </top>
 
     <center>

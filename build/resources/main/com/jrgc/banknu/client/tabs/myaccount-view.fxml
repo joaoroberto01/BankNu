@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <?import java.net.URL?>
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.jrgc.banknu.controllers.client.tabs.MyAccountsController">
@@ -15,8 +12,7 @@
     </padding>
 
     <top>
-        <Label BorderPane.alignment="CENTER" textAlignment="CENTER" style="-fx-font-size: 15pt;" text="Minhas Contas"
-               textFill="#9F3EDE"/>
+        <Label BorderPane.alignment="CENTER" textAlignment="CENTER" styleClass="title" text="Minhas Contas" />
     </top>
 
     <center>

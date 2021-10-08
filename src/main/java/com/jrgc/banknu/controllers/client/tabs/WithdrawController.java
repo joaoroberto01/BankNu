@@ -1,13 +1,13 @@
 package com.jrgc.banknu.controllers.client.tabs;
 
+import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.exceptions.BalanceException;
-import com.jrgc.banknu.models.BankStatementItem;
-import com.jrgc.banknu.uicomponents.CurrencyField;
-import com.jrgc.banknu.controllers.client.ClientController;
 import com.jrgc.banknu.models.BankAccount;
+import com.jrgc.banknu.models.BankStatementItem;
+import com.jrgc.banknu.models.Client;
+import com.jrgc.banknu.uicomponents.CurrencyField;
 import com.jrgc.banknu.utils.AlertUtils;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 
 public class WithdrawController {
@@ -17,9 +17,12 @@ public class WithdrawController {
     @FXML
     private CurrencyField moneyTextField;
 
+    private Client currentClient;
+
     @FXML
     public void initialize() {
         System.out.println("Withdraw initialize");
+        currentClient = (Client) BankApplication.currentUser;
     }
 
     @FXML
@@ -32,15 +35,14 @@ public class WithdrawController {
                 return;
             }
 
-            int index = accountsChoiceBox.getSelectionModel().getSelectedIndex();
-
-            BankAccount bankAccount = ClientController.bankAccounts.get(index);
+            BankAccount bankAccount = accountsChoiceBox.getSelectionModel().getSelectedItem();
             bankAccount.withdraw(amount);
 
             BankStatementItem item = new BankStatementItem(bankAccount.getNumber(), amount, BankStatementItem.BankOperation.WITHDRAW);
-            ClientController.bankStatement.add(item);
+            bankAccount.getBankStatement().add(item);
 
-            accountsChoiceBox.getItems().set(index, ClientController.bankAccounts.get(index));
+            int index = accountsChoiceBox.getSelectionModel().getSelectedIndex();
+            accountsChoiceBox.getItems().set(index, currentClient.getBankAccounts().get(index));
             accountsChoiceBox.getSelectionModel().select(index);
 
             AlertUtils.showInformation("Saque efetuado com sucesso!");
@@ -52,7 +54,7 @@ public class WithdrawController {
     }
 
     public void onRefresh() {
-        accountsChoiceBox.getItems().setAll(ClientController.bankAccounts);
+        accountsChoiceBox.getItems().setAll(currentClient.getBankAccounts());
         accountsChoiceBox.getSelectionModel().selectFirst();
 
         moneyTextField.setAmount(0.0);

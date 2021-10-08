@@ -13,8 +13,7 @@
     </padding>
 
     <top>
-        <Label BorderPane.alignment="CENTER" textAlignment="CENTER" style="-fx-font-size: 15pt;" text="Saque"
-               textFill="#9F3EDE"/>
+        <Label BorderPane.alignment="CENTER" textAlignment="CENTER" styleClass="title" text="Saque" />
     </top>
 
     <left>

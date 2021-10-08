@@ -18,7 +18,7 @@ public class HomeController {
 
     @FXML
     public void initialize(){
-        welcomeText.setText(Utils.getGreeting() + ", Cliente\nSeja bem-vindo ao roxinho!");
+        welcomeText.setText(String.format("%s, %s,\nSeja bem-vindo ao roxinho!", Utils.getGreeting(), BankApplication.currentUser.getUsername()));
     }
 
     @FXML

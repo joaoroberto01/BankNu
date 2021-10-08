@@ -1,5 +1,6 @@
 package com.jrgc.banknu.controllers.client.tabs;
 
+import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.controllers.client.ClientController;
 import com.jrgc.banknu.models.*;
 import javafx.fxml.FXML;
@@ -27,19 +28,19 @@ public class MyAccountsController {
     public void initialize(){
         System.out.println("MyAccount initialize");
 
-        accountsListView.setMouseTransparent(true);
-        accountsListView.setFocusTraversable(false);
+        //accountsListView.setSelectionModel(null);
         checkListVisibility();
     }
 
     private void checkListVisibility() {
-        boolean emptyAccounts = accountsListView.getItems().size() == 0;
+        boolean emptyAccounts = accountsListView.getItems().isEmpty();
         accountsListView.setManaged(!emptyAccounts);
         emptyListText.setManaged(emptyAccounts);
     }
 
     public void onRefresh() {
-        accountsListView.getItems().setAll(ClientController.bankAccounts);
+        accountsListView.getItems().setAll(((Client) BankApplication.currentUser).getBankAccounts());
+        checkListVisibility();
     }
 
     @FXML
@@ -70,26 +71,13 @@ public class MyAccountsController {
     }
 
     private void openNewAccount(BankAccount.AccountType accountType){
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource("client/new-account-view.fxml"));
-//            NewAccountController newAccountController = new NewAccountController(accountType, accountsListView);
-//            fxmlLoader.setController(newAccountController);
-//            Scene scene = new Scene(fxmlLoader.load(), 320, 250);
-//
-//            Stage stage = new Stage();
-//            stage.setTitle("Nova Conta");
-//            stage.setScene(scene);
-//            stage.show();
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        }
         BankAccount account = switch (accountType) {
             case SIMPLE -> new SimpleBankAccount();
             case SPECIAL -> new SpecialBankAccount();
             case SAVINGS -> new SavingsBankAccount();
         };
 
-        ClientController.bankAccounts.add(account);
+        ((Client) BankApplication.currentUser).getBankAccounts().add(account);
         accountsListView.getItems().add(account);
         checkListVisibility();
     }

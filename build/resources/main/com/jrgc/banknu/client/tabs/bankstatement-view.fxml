@@ -17,8 +17,7 @@
     </padding>
 
     <top>
-        <Label BorderPane.alignment="CENTER" textAlignment="CENTER" style="-fx-font-size: 15pt;" text="Extrato"
-               textFill="#9F3EDE"/>
+        <Label BorderPane.alignment="CENTER" textAlignment="CENTER" text="Extrato" styleClass="title"/>
     </top>
 
     <center>

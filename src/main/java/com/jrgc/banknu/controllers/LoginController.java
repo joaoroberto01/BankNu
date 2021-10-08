@@ -30,44 +30,19 @@ public class LoginController {
     @FXML
     protected void onSignIn(ActionEvent event) {
         boolean success;
-        String inputUsername = EncryptUtils.toSHA1(userField.getText());
+        String inputUsername = userField.getText();
         String inputPassword = EncryptUtils.toSHA1(passwordField.getText());
 
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("auth.bn"));
-
-            String line, read = "";
-            while ((line = br.readLine()) != null)
-                read = read.concat(line);
-
-            br.close();
-
-            byte[] decoded = Base64.getDecoder().decode(read);
-            String json = new String(decoded, StandardCharsets.UTF_8);
-
-            List<BankUser> bankUsers = BankUser.listFrom(json);
-
-            for (BankUser bankUser : bankUsers){
-                System.out.println(bankUser.getUsername());
-                System.out.println(bankUser.getPassword());
-                System.out.println(bankUser.getUsertype());
-
-                success = bankUser.auth(inputUsername, inputPassword);
-                if (success){
-                    BankApplication.currentUser = bankUser;
-                    break;
-                }
+        for (BankUser bankUser : BankApplication.bankUsers){
+            success = bankUser.auth(inputUsername, inputPassword);
+            if (success){
+                BankApplication.currentUser = bankUser;
+                break;
             }
-
-            for (BankUser bankUser : bankUsers)
-                if (!BankApplication.bankUsers.contains(bankUser))
-                    BankApplication.bankUsers.add(bankUser);
-        } catch (IOException e){
-            e.printStackTrace();
         }
 
         if (BankApplication.currentUser == null)
-            errorText.setText("Email ou senha inválidos");
+            errorText.setManaged(true);
         else{
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
@@ -76,7 +51,7 @@ public class LoginController {
 
             String view = switch (userType){
                 case CLIENT -> "client/client-view.fxml";
-                case MANAGER -> "";
+                case MANAGER -> "manager/manager-view.fxml";
             };
 
             try {

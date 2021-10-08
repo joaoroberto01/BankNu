@@ -2,15 +2,19 @@ package com.jrgc.banknu.models;
 
 import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BankUser {
+public abstract class BankUser {
+    private static final String CLIENT = "client";
+    private static final String MANAGER = "manager";
+
     public enum UserType {
-        @SerializedName("0")
+        @SerializedName("client")
         CLIENT,
-        @SerializedName("1")
+        @SerializedName("manager")
         MANAGER;
 
         @Override
@@ -22,15 +26,18 @@ public class BankUser {
         }
     }
 
-    private String username, password;
-    private UserType usertype;
+    private final String username;
+    private final String password;
+    private final UserType usertype;
+
+    public BankUser(String username, String password, UserType usertype) {
+        this.username = username;
+        this.password = password;
+        this.usertype = usertype;
+    }
 
     public String getUsername() {
         return username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public UserType getUsertype() {
@@ -39,6 +46,18 @@ public class BankUser {
 
     public boolean auth(String username, String password){
         return this.username.equals(username) && this.password.equals(password);
+    }
+
+    @Override
+    public String toString() {
+        return username + " - " + usertype;
+    }
+
+    public static String toJson(List<BankUser> bankUsers){
+        Gson gson = new Gson();
+
+        TypeToken<List<BankUser>> typeToken = new TypeToken<>(){};
+        return gson.toJson(bankUsers, typeToken.getType());
     }
 
     public static List<BankUser> listFrom(String json){
@@ -54,7 +73,12 @@ public class BankUser {
         Gson gson = new Gson();
         JsonObject jsonObject = JsonParser.parseString(json).getAsJsonObject();
 
-        return jsonObject.get("usertype").getAsInt() == 0 ?
-                gson.fromJson(json, Client.class) : gson.fromJson(json, Manager.class);
+        String usertype = jsonObject.get("usertype").getAsString();
+        if (usertype.equals(CLIENT))
+            return gson.fromJson(json, Client.class);
+        else if (usertype.equals(MANAGER))
+            return gson.fromJson(json, Manager.class);
+
+        return null;
     }
 }

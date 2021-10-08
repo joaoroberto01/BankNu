@@ -9,21 +9,31 @@
 <?import javafx.scene.control.PasswordField?>
 <?import java.net.URL?>
 <?import javafx.scene.text.Text?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.jrgc.banknu.controllers.LoginController" style="-fx-background-color: #830AD1">
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jrgc.banknu.controllers.LoginController"
+            style="-fx-background-color: #830AD1">
     <padding>
-        <Insets topRightBottomLeft="20.0"/>
+        <Insets topRightBottomLeft="40.0"/>
     </padding>
 
-    <Text styleClass="title" text="BankNU" style="-fx-fill: white"/>
+    <top>
+        <Text BorderPane.alignment="CENTER" styleClass="title" text="BankNU" style="-fx-fill: white"/>
+    </top>
 
-    <TextField fx:id="userField" promptText="Usuário" onAction="#onSignIn"/>
-    <PasswordField fx:id="passwordField" promptText="Senha" onAction="#onSignIn"/>
+    <center>
+        <VBox spacing="20" alignment="CENTER">
+            <TextField fx:id="userField" promptText="Usuário" onAction="#onSignIn"/>
+            <PasswordField fx:id="passwordField" promptText="Senha" onAction="#onSignIn"/>
 
-    <Button text="Entrar" textFill="white" prefWidth="300.0" onAction="#onSignIn"/>
-    <Label fx:id="errorText" textFill="red"/>
+            <Button text="Entrar" textFill="white" prefWidth="300.0" onAction="#onSignIn"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <Label BorderPane.alignment="CENTER" fx:id="errorText" text="⚠ Email ou senha inválidos" managed="false" styleClass="errorText" textFill="white"/>
+    </bottom>
 
     <stylesheets>
-        <URL value="@styles/login.css" />
+        <URL value="@styles/login.css"/>
     </stylesheets>
-</VBox>
+</BorderPane>

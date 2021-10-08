@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+<TabPane fx:id="tabPane" xmlns:fx="http://javafx.com/fxml" fx:controller="com.jrgc.banknu.controllers.manager.ManagerController"
+         tabClosingPolicy="UNAVAILABLE">
+
+    <Tab text="Início">
+        <fx:include source="tabs/home-view.fxml"/>
+    </Tab>
+
+    <Tab text="Usuários" onSelectionChanged="#onTabRefresh">
+        <fx:include fx:id="users" source="tabs/users-view.fxml"/>
+    </Tab>
+
+    <Tab text="Meus Clientes" onSelectionChanged="#onTabRefresh">
+        <fx:include fx:id="myClients" source="tabs/myclients-view.fxml"/>
+    </Tab>
+
+<!--    <Tab text="Saque" onSelectionChanged="#onTabRefresh">-->
+<!--        <fx:include fx:id="withdraw" source="tabs/withdraw-view.fxml"/>-->
+<!--    </Tab>-->
+
+<!--    <Tab text="Depósito" onSelectionChanged="#onTabRefresh">-->
+<!--        <fx:include fx:id="deposit" source="tabs/deposit-view.fxml"/>-->
+<!--    </Tab>-->
+
+    <stylesheets>
+        <URL value="@../styles/main.css" />
+    </stylesheets>
+</TabPane>
