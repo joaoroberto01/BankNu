@@ -27,7 +27,7 @@ public abstract class BankUser {
     }
 
     private final String username;
-    private final String password;
+    private String password;
     private final UserType usertype;
 
     public BankUser(String username, String password, UserType usertype) {
@@ -46,6 +46,14 @@ public abstract class BankUser {
 
     public boolean auth(String username, String password){
         return this.username.equals(username) && this.password.equals(password);
+    }
+
+    public boolean changePassword(String password, String newPassword){
+        boolean success = this.password.equals(password);
+        if (success)
+            this.password = newPassword;
+
+        return success;
     }
 
     @Override

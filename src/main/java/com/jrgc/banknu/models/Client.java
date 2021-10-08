@@ -12,11 +12,6 @@ public class Client extends BankUser {
         super(username, password, UserType.CLIENT);
     }
 
-    @Override
-    public String toString() {
-        return getUsername();
-    }
-
     public ObservableList<BankAccount> getBankAccounts() {
         if (bankAccounts == null)
             bankAccounts = FXCollections.observableArrayList();
@@ -25,5 +20,10 @@ public class Client extends BankUser {
 
     public void setBankAccounts(List<BankAccount> bankAccounts){
         this.bankAccounts = FXCollections.observableList(bankAccounts);
+    }
+
+    @Override
+    public String toString() {
+        return getUsername();
     }
 }

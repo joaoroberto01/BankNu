@@ -3,6 +3,13 @@
     -fx-text-fill: #9F3EDE;
 }
 
+.errorText {
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: rgba(255, 0, 0, 0.3);
+    -fx-padding: 10px;
+}
+
 .button {
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
