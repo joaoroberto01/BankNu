@@ -10,17 +10,7 @@ public class ManagerController {
     public MyClientsController myClientsController;
 
     @FXML
-    public TabPane tabPane;
-
-    @FXML
-    protected void initialize(){
-        tabPane.getSelectionModel().select(0);
-    }
-
-    @FXML
     public void onTabRefresh(){
         myClientsController.onRefresh();
-//        withdrawController.onRefresh();
-//        depositController.onRefresh();
     }
 }

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import javafx.geometry.Insets?>
-<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jrgc.banknu.controllers.manager.tabs.HomeController">
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.jrgc.banknu.controllers.manager.tabs.ManagerHomeController">
     <padding> <Insets topRightBottomLeft="20"/> </padding>
     <top>
         <Label BorderPane.alignment="CENTER" fx:id="welcomeText" textAlignment="CENTER" styleClass="title" />

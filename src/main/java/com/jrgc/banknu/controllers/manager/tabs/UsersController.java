@@ -1,11 +1,10 @@
 package com.jrgc.banknu.controllers.manager.tabs;
 
 import com.jrgc.banknu.BankApplication;
-import com.jrgc.banknu.controllers.manager.ManagerController;
 import com.jrgc.banknu.controllers.manager.NewUserController;
 import com.jrgc.banknu.models.*;
-import com.jrgc.banknu.utils.UserPersist;
-import javafx.beans.binding.Bindings;
+import com.jrgc.banknu.utils.SceneManager;
+import com.jrgc.banknu.utils.UserPersistUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -17,7 +16,6 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import java.io.IOException;
-import java.util.List;
 
 public class UsersController {
 
@@ -62,23 +60,7 @@ public class UsersController {
     }
 
     private void createNewUser(BankUser.UserType userType){
-        BankUser bankUser = null;
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource("manager/tabs/new-user-view.fxml"));
-            Parent parent = fxmlLoader.load();
-            NewUserController newUserController = fxmlLoader.getController();
-            newUserController.setUserType(userType);
-
-            Scene scene = new Scene(parent, 320, 250);
-            Stage stage = new Stage();
-            stage.setTitle("Novo Usuário");
-            stage.setScene(scene);
-            stage.showAndWait();
-
-            bankUser = newUserController.getNewUser();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
+        BankUser bankUser = SceneManager.popUpNewUser(userType);
         if (bankUser == null)
             return;
 
@@ -96,7 +78,7 @@ public class UsersController {
         }
 
         refresh();
-        UserPersist.storeUsers();
+        UserPersistUtils.storeUsers();
     }
 
     private void setupColumns() {

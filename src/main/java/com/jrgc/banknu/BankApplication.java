@@ -1,13 +1,10 @@
 package com.jrgc.banknu;
 
 import com.jrgc.banknu.models.BankUser;
-import com.jrgc.banknu.utils.UserPersist;
-import com.jrgc.banknu.utils.Utils;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import com.jrgc.banknu.utils.SceneManager;
+import com.jrgc.banknu.utils.UserPersistUtils;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,24 +15,11 @@ public class BankApplication extends javafx.application.Application {
 
     @Override
     public void start(Stage stage) {
-        goToLoginScene(stage);
-        UserPersist.fetchUsers();
+        SceneManager.goToLogin(stage);
+        UserPersistUtils.fetchUsers();
     }
 
     public static void main(String[] args) {
         launch();
-    }
-
-    public static void goToLoginScene(Stage stage){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource("login-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 380, 320);
-
-            stage.setTitle("Autenticação BankNu");
-            stage.setScene(scene);
-            stage.show();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 }

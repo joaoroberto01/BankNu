@@ -10,7 +10,7 @@
 <?import java.net.URL?>
 <?import javafx.scene.text.Text?>
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.jrgc.banknu.controllers.client.tabs.BankStatementController">
+            fx:controller="com.jrgc.banknu.controllers.client.tabs.ClientBankStatementController">
 
     <padding>
         <Insets topRightBottomLeft="20.0"/>
@@ -36,8 +36,8 @@
                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
                 </columnResizePolicy>
                 <columns>
-                    <TableColumn fx:id="dateColumn" text="Data e Hora" minWidth="60" reorderable="false" sortable="false"/>
-                    <TableColumn fx:id="operationCol" text="Operação" minWidth="60" reorderable="false" sortable="false"/>
+                    <TableColumn fx:id="dateColumn" text="Data e Hora" minWidth="110" maxWidth="120" reorderable="false" sortable="false"/>
+                    <TableColumn fx:id="operationCol" text="Operação" minWidth="80" maxWidth="90" reorderable="false" sortable="false"/>
                     <TableColumn fx:id="amountCol" text="Valor" minWidth="160" reorderable="false" sortable="false"/>
                 </columns>
             </TableView>

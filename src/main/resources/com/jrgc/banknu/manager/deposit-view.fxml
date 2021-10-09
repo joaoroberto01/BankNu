@@ -5,23 +5,21 @@
 
 <?import javafx.geometry.Insets?>
 <?import com.jrgc.banknu.uicomponents.CurrencyField?>
-<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<?import java.net.URL?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.jrgc.banknu.controllers.DepositController">
 
     <padding>
         <Insets topRightBottomLeft="20.0"/>
     </padding>
 
     <top>
-        <Label BorderPane.alignment="CENTER" textAlignment="CENTER" style="-fx-font-size: 15pt;" text="Depósito"
+        <Label BorderPane.alignment="CENTER" fx:id="accountText" textAlignment="CENTER" styleClass="title" text="Depósito"
                textFill="#9F3EDE"/>
     </top>
 
     <left>
-        <VBox spacing="20">
-            <VBox spacing="8">
-                <Label text="Selecione uma conta:"/>
-                <ChoiceBox fx:id="accountsChoiceBox"/>
-            </VBox>
+        <VBox spacing="20" BorderPane.alignment="CENTER">
             <VBox spacing="8">
                 <Label text="Valor:"/>
                 <CurrencyField fx:id="moneyTextField" promptText="R$" />
@@ -29,4 +27,8 @@
             <Button text="Depositar" onAction="#onDepositClick"/>
         </VBox>
     </left>
+
+    <stylesheets>
+        <URL value="@../styles/main.css" />
+    </stylesheets>
 </BorderPane>

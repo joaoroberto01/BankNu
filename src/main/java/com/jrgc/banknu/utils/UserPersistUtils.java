@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.List;
 
-public class UserPersist {
+public class UserPersistUtils {
     private static final String AUTH_FILE = "auth.bn";
 
     public static void fetchUsers(){

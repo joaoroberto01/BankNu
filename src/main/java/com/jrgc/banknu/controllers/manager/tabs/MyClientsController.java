@@ -1,8 +1,10 @@
 package com.jrgc.banknu.controllers.manager.tabs;
 
 import com.jrgc.banknu.BankApplication;
-import com.jrgc.banknu.controllers.manager.BankStatementController;
+import com.jrgc.banknu.controllers.BankStatementController;
+import com.jrgc.banknu.controllers.DepositController;
 import com.jrgc.banknu.models.*;
+import com.jrgc.banknu.utils.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -58,23 +60,6 @@ public class MyClientsController {
         clientsAccordion.getPanes().setAll(titledPanes);
     }
 
-    private void bankStatement(BankAccount selectedAccount){
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource("manager/bankstatement-view.fxml"));
-            Parent parent = fxmlLoader.load();
-            BankStatementController bankStatementController = fxmlLoader.getController();
-            bankStatementController.setupAccount(selectedAccount);
-
-            Scene scene = new Scene(parent, 480, 480);
-            Stage stage = new Stage();
-            stage.setTitle(String.format("Extrato - Conta %d", selectedAccount.getNumber()));
-            stage.setScene(scene);
-            stage.showAndWait();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-    }
-
     private Node getPaneContent(List<BankAccount> bankAccounts){
         if (bankAccounts == null || bankAccounts.isEmpty()) {
             Label label = new Label("Nenhuma conta registrada para esse cliente");
@@ -82,19 +67,32 @@ public class MyClientsController {
             return label;
         }
 
-        ListView<BankAccount> accountListView = new ListView<>();
+        final ListView<BankAccount> accountListView = new ListView<>();
         accountListView.getItems().setAll(bankAccounts);
 
         final ContextMenu menu = new ContextMenu();
 
         MenuItem bankStatementMenuItem = new MenuItem("Ver Extrato");
-        bankStatementMenuItem.setOnAction(event -> bankStatement(accountListView.getSelectionModel().getSelectedItem()));
-        menu.getItems().add(bankStatementMenuItem);
+        bankStatementMenuItem.setOnAction(event -> SceneManager.popUpBankStatement(accountListView.getSelectionModel().getSelectedItem()));
+
+        MenuItem depositMenuItem = new MenuItem("Depósito");
+        depositMenuItem.setOnAction(event -> {
+            SceneManager.popUpDeposit(accountListView.getSelectionModel().getSelectedItem());
+            accountListView.refresh();
+        });
+
+        MenuItem transferMenuItem = new MenuItem("Transferir");
+        transferMenuItem.setOnAction(event -> {
+            SceneManager.popUpTransfer(accountListView.getSelectionModel().getSelectedItem());
+            accountListView.refresh();
+        });
+
+        menu.getItems().addAll(bankStatementMenuItem, depositMenuItem, transferMenuItem);
 
         accountListView.setContextMenu(menu);
 
         VBox vBox = new VBox(10);
-        vBox.getChildren().add(new Label("Use o botão direito para ver o extrato"));
+        vBox.getChildren().add(new Label("Use o botão direito para ver as opções da conta"));
         vBox.getChildren().add(accountListView);
 
         return vBox;

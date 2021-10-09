@@ -1,14 +1,10 @@
-package com.jrgc.banknu.controllers.client.tabs;
+package com.jrgc.banknu.controllers;
 
-import com.jrgc.banknu.BankApplication;
-import com.jrgc.banknu.controllers.client.ClientController;
 import com.jrgc.banknu.models.BankAccount;
 import com.jrgc.banknu.models.BankStatementItem;
-import com.jrgc.banknu.models.Client;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -20,10 +16,8 @@ import javafx.util.Callback;
 
 import java.text.NumberFormat;
 import java.util.Locale;
-import java.util.function.Predicate;
 
 public class BankStatementController {
-
     @FXML
     public TableView<BankStatementItem> bankStatementTableView;
 
@@ -37,45 +31,30 @@ public class BankStatementController {
     public TableColumn<BankStatementItem, Float> amountCol;
 
     @FXML
-    public ChoiceBox<BankAccount> accountsChoiceBox;
-
-    @FXML
     public Text balanceText;
 
-    private Client currentClient;
-    private BankAccount selectedAccount;
+    @FXML
+    public Label titleLabel;
+
+    protected BankAccount selectedAccount;
 
     @FXML
     public void initialize(){
         System.out.println("BankStatement initialize");
-        currentClient = (Client) BankApplication.currentUser;
         setupColumns();
         bankStatementTableView.setSelectionModel(null);
     }
 
-    public void onRefresh() {
-        ObservableList<BankAccount> bankAccounts = accountsChoiceBox.getItems();
-        bankAccounts.setAll(currentClient.getBankAccounts());
-        if (bankAccounts.size() != 0) {
-            int index = bankAccounts.indexOf(selectedAccount);
-            index = index == -1 ? 0 : index;
-            accountsChoiceBox.getSelectionModel().select(index);
-        }
+    public void setupAccount(BankAccount selectedAccount){
+        this.selectedAccount = selectedAccount;
+        titleLabel.setText(String.format("Extrato - Conta %d", selectedAccount.getNumber()));
         updateTable();
     }
 
-    public void onSelectChoice() {
-        if (accountsChoiceBox.getValue() == null)
-            return;
-
-        selectedAccount = accountsChoiceBox.getValue();
-
-        updateTable();
-    }
-
-    private void updateTable() {
+    protected void updateTable() {
         if (selectedAccount == null)
             return;
+
         bankStatementTableView.getItems().setAll(selectedAccount.getBankStatement());
 
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));

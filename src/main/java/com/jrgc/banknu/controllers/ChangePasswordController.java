@@ -1,18 +1,15 @@
-package com.jrgc.banknu.controllers.client;
+package com.jrgc.banknu.controllers;
 
 import com.jrgc.banknu.BankApplication;
-import com.jrgc.banknu.models.Client;
 import com.jrgc.banknu.utils.EncryptUtils;
+import com.jrgc.banknu.utils.SceneManager;
+import com.jrgc.banknu.utils.UserPersistUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-
-import java.io.IOException;
+import javafx.stage.Stage;
 
 public class ChangePasswordController {
 
@@ -23,14 +20,10 @@ public class ChangePasswordController {
     public Label errorText;
 
     @FXML
-    public void initialize(){
-        System.out.println("Password initialize");
-    }
-
-    @FXML
     protected void onChangePassword(ActionEvent actionEvent){
         String oldPassword = EncryptUtils.toSHA1(oldPasswordField.getText());
         String newPassword = EncryptUtils.toSHA1(newPasswordField.getText());
+
         if (!oldPassword.equals(newPassword)) {
             errorText.setText("⚠ As senhas não coincidem");
             errorText.setManaged(true);
@@ -42,12 +35,11 @@ public class ChangePasswordController {
             errorText.setText("⚠ Senha incorreta.");
             return;
         }
+        //Set new password
+        errorText.setText("Senha alterada com sucesso");
+        UserPersistUtils.storeUsers();
 
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Senha alterada com sucesso!");
-        alert.showAndWait();
-
-        Node node = (Node) actionEvent.getSource();
-        node.getScene().getWindow().hide();
+        Stage currentStage = SceneManager.getCurrentStage((Node) actionEvent.getSource());
+        currentStage.hide();
     }
 }

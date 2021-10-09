@@ -17,14 +17,6 @@ public class WithdrawController {
     @FXML
     private CurrencyField moneyTextField;
 
-    private Client currentClient;
-
-    @FXML
-    public void initialize() {
-        System.out.println("Withdraw initialize");
-        currentClient = (Client) BankApplication.currentUser;
-    }
-
     @FXML
     public void onWithdrawClick(){
         try {
@@ -42,7 +34,7 @@ public class WithdrawController {
             bankAccount.getBankStatement().add(item);
 
             int index = accountsChoiceBox.getSelectionModel().getSelectedIndex();
-            accountsChoiceBox.getItems().set(index, currentClient.getBankAccounts().get(index));
+            accountsChoiceBox.getItems().set(index, bankAccount);
             accountsChoiceBox.getSelectionModel().select(index);
 
             AlertUtils.showInformation("Saque efetuado com sucesso!");
@@ -54,8 +46,8 @@ public class WithdrawController {
     }
 
     public void onRefresh() {
+        final Client currentClient = (Client) BankApplication.currentUser;
         accountsChoiceBox.getItems().setAll(currentClient.getBankAccounts());
-        accountsChoiceBox.getSelectionModel().selectFirst();
 
         moneyTextField.setAmount(0.0);
     }

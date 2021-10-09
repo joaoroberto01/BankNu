@@ -3,12 +3,13 @@ package com.jrgc.banknu.controllers.manager;
 import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.models.*;
 import com.jrgc.banknu.utils.EncryptUtils;
-import com.jrgc.banknu.utils.UserPersist;
+import com.jrgc.banknu.utils.SceneManager;
+import com.jrgc.banknu.utils.UserPersistUtils;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 public class NewUserController {
     @FXML
@@ -47,21 +48,14 @@ public class NewUserController {
             case MANAGER -> new Manager(username, password);
         };
 
-        if (newUser instanceof Client) {
-            Manager currentUser = (Manager) BankApplication.currentUser;
-            currentUser.getClients().add((Client) newUser);
-
-            System.out.println(currentUser.getClients());
-            int i = BankApplication.bankUsers.indexOf(currentUser);
-            System.out.println(i);
-            BankApplication.bankUsers.set(i, currentUser);
-        }
+        if (newUser instanceof Client)
+            ((Manager) BankApplication.currentUser).getClients().add((Client) newUser);
 
         BankApplication.bankUsers.add(newUser);
 
-        UserPersist.storeUsers();
+        UserPersistUtils.storeUsers();
 
-        Node node = (Node) actionEvent.getSource();
-        node.getScene().getWindow().hide();
+        Stage currentStage = SceneManager.getCurrentStage((Node) actionEvent.getSource());
+        currentStage.hide();
     }
 }

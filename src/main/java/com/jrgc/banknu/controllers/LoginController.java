@@ -3,6 +3,7 @@ package com.jrgc.banknu.controllers;
 import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.models.BankUser;
 import com.jrgc.banknu.utils.EncryptUtils;
+import com.jrgc.banknu.utils.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,7 @@ public class LoginController {
     private PasswordField passwordField;
 
     @FXML
-    protected void onSignIn(ActionEvent event) {
+    protected void onSignIn(ActionEvent actionEvent) {
         boolean success;
         String inputUsername = userField.getText();
         String inputPassword = EncryptUtils.toSHA1(passwordField.getText());
@@ -44,25 +45,8 @@ public class LoginController {
         if (BankApplication.currentUser == null)
             errorText.setManaged(true);
         else{
-            Node node = (Node) event.getSource();
-            Stage stage = (Stage) node.getScene().getWindow();
-
-            BankUser.UserType userType = BankApplication.currentUser.getUsertype();
-
-            String view = switch (userType){
-                case CLIENT -> "client/client-view.fxml";
-                case MANAGER -> "manager/manager-view.fxml";
-            };
-
-            try {
-                FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource(view));
-                Scene scene = new Scene(fxmlLoader.load(), 480, 480);
-
-                stage.setScene(scene);
-                stage.setTitle("Acesso " + userType);
-            }catch (IOException e){
-                e.printStackTrace();
-            }
+            Stage currentStage = SceneManager.getCurrentStage((Node) actionEvent.getSource());
+            SceneManager.goToMain(currentStage, BankApplication.currentUser.getUsertype());
         }
 
     }
