@@ -1,8 +1,10 @@
 package com.jrgc.banknu.utils;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class Utils {
     public static String getGreeting(){
@@ -19,5 +21,10 @@ public class Utils {
     public static String getCurrentDateTime(){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return simpleDateFormat.format(new Date());
+    }
+
+    public static String getCurrencyFormatted(float balance){
+        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+        return numberFormat.format(balance);
     }
 }

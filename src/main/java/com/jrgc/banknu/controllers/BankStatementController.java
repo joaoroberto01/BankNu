@@ -1,7 +1,7 @@
 package com.jrgc.banknu.controllers;
 
-import com.jrgc.banknu.models.BankAccount;
-import com.jrgc.banknu.models.BankStatementItem;
+import com.jrgc.banknu.models.*;
+import com.jrgc.banknu.utils.Utils;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -34,6 +34,9 @@ public class BankStatementController {
     public Text balanceText;
 
     @FXML
+    public Text detailText;
+
+    @FXML
     public Label titleLabel;
 
     protected BankAccount selectedAccount;
@@ -57,8 +60,13 @@ public class BankStatementController {
 
         bankStatementTableView.getItems().setAll(selectedAccount.getBankStatement());
 
-        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-        balanceText.setText("Saldo: " + numberFormat.format(selectedAccount.getBalance()));
+        balanceText.setText("Saldo: " + Utils.getCurrencyFormatted(selectedAccount.getBalance()));
+
+        detailText.setVisible(!(selectedAccount instanceof SimpleBankAccount));
+        if (selectedAccount instanceof SpecialBankAccount)
+            detailText.setText("Limite Negativo: " + Utils.getCurrencyFormatted((float) ((SpecialBankAccount) selectedAccount).getLimit()));
+        else if(selectedAccount instanceof SavingsBankAccount)
+            detailText.setText(String.format("Taxa de Poupança: %.2f%%", ((SavingsBankAccount) selectedAccount).getTax()));
     }
 
     private void setupColumns() {
@@ -100,8 +108,7 @@ public class BankStatementController {
 
                         Paint paint = item < 0 ? Color.RED : Color.GREEN;
 
-                        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt","BR"));
-                        Label label = new Label(numberFormat.format(item));
+                        Label label = new Label(Utils.getCurrencyFormatted(item));
                         label.setTextFill(paint);
 
                         HBox hBox = new HBox();

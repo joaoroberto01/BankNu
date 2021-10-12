@@ -77,6 +77,11 @@
     -fx-fill: green;
 }
 
+.limit-label {
+    -fx-font-size: 12pt;
+    -fx-font-weight: bolder;
+}
+
 .titled-pane > .title {
     -fx-font-size: 10pt;
 }

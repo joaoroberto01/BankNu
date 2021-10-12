@@ -6,7 +6,7 @@
 <?import javafx.geometry.Insets?>
 <?import com.jrgc.banknu.uicomponents.CurrencyField?>
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.jrgc.banknu.controllers.client.tabs.WithdrawController">
+            fx:controller="com.jrgc.banknu.controllers.client.tabs.ClientWithdrawController">
 
     <padding>
         <Insets topRightBottomLeft="20.0"/>

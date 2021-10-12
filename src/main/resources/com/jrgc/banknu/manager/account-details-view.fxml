@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import com.jrgc.banknu.uicomponents.CurrencyField?>
+<?import java.net.URL?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.jrgc.banknu.controllers.manager.AccountDetailsController">
+
+    <padding>
+        <Insets topRightBottomLeft="20.0"/>
+    </padding>
+
+    <top>
+        <Label BorderPane.alignment="CENTER" fx:id="accountText" textAlignment="CENTER" styleClass="title"
+               textFill="#9F3EDE"/>
+    </top>
+
+    <center>
+        <VBox spacing="20" BorderPane.alignment="CENTER">
+            <VBox spacing="8">
+                <Label fx:id="valueLabel" text="Taxa da Poupança:"/>
+                <CurrencyField fx:id="limitTextField" promptText="R$"/>
+                <TextField fx:id="taxTextField" promptText="R$"/>
+            </VBox>
+            <Button text="Definir" onAction="#onDetailClick"/>
+        </VBox>
+    </center>
+
+    <stylesheets>
+        <URL value="@../styles/main.css"/>
+    </stylesheets>
+</BorderPane>

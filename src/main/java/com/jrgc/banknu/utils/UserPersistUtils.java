@@ -21,8 +21,7 @@ public class UserPersistUtils {
 
             bufferedReader.close();
 
-//            String json = EncryptUtils.base64Decode(read);
-            String json = read;
+            String json = EncryptUtils.base64Decode(read);
             List<BankUser> bankUsers = BankUser.listFrom(json);
 
             BankApplication.bankUsers.addAll(bankUsers);
@@ -37,8 +36,7 @@ public class UserPersistUtils {
 
             String j = BankUser.toJson(BankApplication.bankUsers);
             System.out.println(j);
-            //String json = EncryptUtils.base64Encode(j);
-            String json = j;
+            String json = EncryptUtils.base64Encode(j);
 
             bufferedWriter.write(json);
             bufferedWriter.close();

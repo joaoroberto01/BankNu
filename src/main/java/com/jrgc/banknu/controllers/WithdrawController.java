@@ -1,4 +1,4 @@
-package com.jrgc.banknu.controllers.client.tabs;
+package com.jrgc.banknu.controllers;
 
 import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.exceptions.BalanceException;
@@ -9,13 +9,21 @@ import com.jrgc.banknu.uicomponents.CurrencyField;
 import com.jrgc.banknu.utils.AlertUtils;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 
 public class WithdrawController {
     @FXML
-    private ChoiceBox<BankAccount> accountsChoiceBox;
+    private CurrencyField moneyTextField;
 
     @FXML
-    private CurrencyField moneyTextField;
+    public Label accountText;
+
+    protected BankAccount selectedAccount;
+
+    public void setupAccount(BankAccount selectedAccount){
+        this.selectedAccount = selectedAccount;
+        accountText.setText(String.format("Saque\nConta %d", selectedAccount.getNumber()));
+    }
 
     @FXML
     public void onWithdrawClick(){
@@ -27,15 +35,15 @@ public class WithdrawController {
                 return;
             }
 
-            BankAccount bankAccount = accountsChoiceBox.getSelectionModel().getSelectedItem();
-            bankAccount.withdraw(amount);
+            if (BankApplication.currentUser instanceof Client && amount > 110000) {
+                AlertUtils.showError("Valor máximo de depósito excedido. Consulte seu gerente");
+                return;
+            }
 
-            BankStatementItem item = new BankStatementItem(bankAccount.getNumber(), amount, BankStatementItem.BankOperation.WITHDRAW);
-            bankAccount.getBankStatement().add(item);
+            selectedAccount.withdraw(amount);
 
-            int index = accountsChoiceBox.getSelectionModel().getSelectedIndex();
-            accountsChoiceBox.getItems().set(index, bankAccount);
-            accountsChoiceBox.getSelectionModel().select(index);
+            BankStatementItem item = new BankStatementItem(amount, BankStatementItem.BankOperation.WITHDRAW);
+            selectedAccount.getBankStatement().add(item);
 
             AlertUtils.showInformation("Saque efetuado com sucesso!");
         } catch (BalanceException balanceException) {
@@ -43,12 +51,5 @@ public class WithdrawController {
         }catch (Exception exception){
             AlertUtils.showWarning("Selecione uma conta");
         }
-    }
-
-    public void onRefresh() {
-        final Client currentClient = (Client) BankApplication.currentUser;
-        accountsChoiceBox.getItems().setAll(currentClient.getBankAccounts());
-
-        moneyTextField.setAmount(0.0);
     }
 }

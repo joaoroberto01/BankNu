@@ -1,7 +1,9 @@
 package com.jrgc.banknu.controllers;
 
+import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.models.BankAccount;
 import com.jrgc.banknu.models.BankStatementItem;
+import com.jrgc.banknu.models.Client;
 import com.jrgc.banknu.uicomponents.CurrencyField;
 import com.jrgc.banknu.utils.AlertUtils;
 import javafx.fxml.FXML;
@@ -17,10 +19,9 @@ public class DepositController {
 
     protected BankAccount selectedAccount;
 
-
     public void setupAccount(BankAccount selectedAccount){
         this.selectedAccount = selectedAccount;
-        accountText.setText(String.format("Depósito - Conta %d", selectedAccount.getNumber()));
+        accountText.setText(String.format("Depósito\nConta %d", selectedAccount.getNumber()));
     }
 
     @FXML
@@ -39,7 +40,7 @@ public class DepositController {
 
         selectedAccount.deposit(amount);
 
-        BankStatementItem item = new BankStatementItem(selectedAccount.getNumber(), amount, BankStatementItem.BankOperation.DEPOSIT);
+        BankStatementItem item = new BankStatementItem(amount, BankStatementItem.BankOperation.DEPOSIT);
         selectedAccount.getBankStatement().add(item);
 
         AlertUtils.showInformation("Depósito efetuado com sucesso!");

@@ -1,11 +1,16 @@
 package com.jrgc.banknu.controllers.manager;
 
-import com.jrgc.banknu.models.BankAccount;
-import com.jrgc.banknu.models.BankStatementItem;
+import com.jrgc.banknu.BankApplication;
+import com.jrgc.banknu.exceptions.BalanceException;
+import com.jrgc.banknu.models.*;
 import com.jrgc.banknu.uicomponents.CurrencyField;
 import com.jrgc.banknu.utils.AlertUtils;
 import javafx.fxml.FXML;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 public class TransferController {
 
@@ -15,28 +20,60 @@ public class TransferController {
     @FXML
     public Label accountText;
 
-    protected BankAccount selectedAccount;
+    @FXML
+    public ChoiceBox<Client> clientChoiceBox;
 
+    @FXML
+    public ChoiceBox<BankAccount> destinationAccountChoiceBox;
 
-    public void setupAccount(BankAccount selectedAccount){
-        this.selectedAccount = selectedAccount;
-        accountText.setText(String.format("Transferencia entre contas\nConta %d", selectedAccount.getNumber()));
+    private BankAccount sourceAccount;
+
+    public void setupSourceAccount(Client sourceClient, BankAccount sourceAccount) {
+        this.sourceAccount = sourceAccount;
+
+        accountText.setText(String.format("Transferência entre contas\nConta %d", sourceAccount.getNumber()));
+        clientChoiceBox.getItems().remove(sourceClient);
+    }
+
+    public void initialize() {
+        List<Client> clients = ((Manager) BankApplication.currentUser).getClients();
+        clientChoiceBox.getItems().setAll(clients);
+    }
+
+    public void onClientSelect() {
+        destinationAccountChoiceBox.setManaged(true);
+        destinationAccountChoiceBox.getItems().setAll(clientChoiceBox.getValue().getBankAccounts());
     }
 
     @FXML
-    public void onDepositClick(){
-        float amount = moneyTextField.getAmount().floatValue();
+    public void onTransferClick() {
+        try {
+            float amount = moneyTextField.getAmount().floatValue();
 
-        if (amount == 0) {
-            AlertUtils.showWarning("Insira um valor maior que R$0,00");
-            return;
+            if (destinationAccountChoiceBox.getValue() == null) {
+                AlertUtils.showWarning("Selecione uma conta");
+                return;
+            }
+
+            if (amount == 0) {
+                AlertUtils.showWarning("Insira um valor maior que R$0,00");
+                return;
+            }
+
+            BankAccount destinationAccount = destinationAccountChoiceBox.getValue();
+
+            sourceAccount.transfer(destinationAccount, amount);
+
+            BankStatementItem sourceItem = new BankStatementItem(-amount, BankStatementItem.BankOperation.TRANSFER);
+            sourceAccount.getBankStatement().add(sourceItem);
+
+            BankStatementItem destinationItem = new BankStatementItem(amount, BankStatementItem.BankOperation.TRANSFER);
+            destinationAccount.getBankStatement().add(destinationItem);
+
+
+            AlertUtils.showInformation("Transferência efetuada com sucesso!");
+        } catch (BalanceException balanceException) {
+            AlertUtils.showError(balanceException.getMessage());
         }
-
-        selectedAccount.deposit(amount);
-
-        BankStatementItem item = new BankStatementItem(selectedAccount.getNumber(), amount, BankStatementItem.BankOperation.DEPOSIT);
-        selectedAccount.getBankStatement().add(item);
-
-        AlertUtils.showInformation("Depósito efetuado com sucesso!");
     }
 }

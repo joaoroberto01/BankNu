@@ -7,4 +7,12 @@ public class SavingsBankAccount extends SimpleBankAccount {
     public SavingsBankAccount() {
         super(AccountType.SAVINGS);
     }
+
+    public float getTax() {
+        return tax;
+    }
+
+    public void setTax(float tax) {
+        this.tax = tax;
+    }
 }

@@ -1,7 +1,6 @@
 package com.jrgc.banknu.controllers.client.tabs;
 
 import com.jrgc.banknu.BankApplication;
-import com.jrgc.banknu.controllers.client.ClientController;
 import com.jrgc.banknu.models.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,10 +8,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 
 public class MyAccountsController {
-    private static final int SIMPLE_MAX = 1;
-    private static final int SAVINGS_MAX = 2;
-    private static final int SPECIAL_MAX = 3;
-
     @FXML
     public ListView<BankAccount> accountsListView;
 
@@ -22,13 +17,14 @@ public class MyAccountsController {
     @FXML
     private Label emptyListText;
 
-    private int simpleCount, specialCount, savingsCount;
+    private Client currentClient;
 
     @FXML
     public void initialize(){
         System.out.println("MyAccount initialize");
 
-        //accountsListView.setSelectionModel(null);
+        currentClient = (Client) BankApplication.currentUser;
+
         checkListVisibility();
     }
 
@@ -38,36 +34,40 @@ public class MyAccountsController {
         emptyListText.setManaged(emptyAccounts);
     }
 
+    private void checkMenuVisibility() {
+        menuSimple.setDisable(currentClient.getSimpleCount() == Client.SIMPLE_MAX);
+        menuSpecial.setDisable(currentClient.getSpecialCount() == Client.SPECIAL_MAX);
+        menuSavings.setDisable(currentClient.getSavingsCount() == Client.SAVINGS_MAX);
+    }
+
     public void onRefresh() {
         accountsListView.getItems().setAll(((Client) BankApplication.currentUser).getBankAccounts());
         checkListVisibility();
+        checkMenuVisibility();
     }
 
     @FXML
     public void onSimpleAccountClick(){
         openNewAccount(BankAccount.AccountType.SIMPLE);
-        simpleCount++;
+        currentClient.incrementSimpleCount();
 
-        if (simpleCount == SIMPLE_MAX)
-            menuSimple.setDisable(true);
+        checkMenuVisibility();
     }
 
     @FXML
     public void onSpecialAccountClick(){
         openNewAccount(BankAccount.AccountType.SPECIAL);
-        specialCount++;
+        currentClient.incrementSpecialCount();
 
-        if (specialCount == SPECIAL_MAX)
-            menuSpecial.setDisable(true);
+        checkMenuVisibility();
     }
 
     @FXML
     public void onSavingsAccountClick(){
         openNewAccount(BankAccount.AccountType.SAVINGS);
-        savingsCount++;
+        currentClient.incrementSavingsCount();
 
-        if (savingsCount == SAVINGS_MAX)
-            menuSavings.setDisable(true);
+        checkMenuVisibility();
     }
 
     private void openNewAccount(BankAccount.AccountType accountType){

@@ -4,7 +4,7 @@ import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.controllers.client.tabs.ClientBankStatementController;
 import com.jrgc.banknu.controllers.client.tabs.ClientDepositController;
 import com.jrgc.banknu.controllers.client.tabs.MyAccountsController;
-import com.jrgc.banknu.controllers.client.tabs.WithdrawController;
+import com.jrgc.banknu.controllers.client.tabs.ClientWithdrawController;
 import com.jrgc.banknu.models.BankUser;
 import com.jrgc.banknu.models.Client;
 import com.jrgc.banknu.models.Manager;
@@ -21,7 +21,7 @@ public class ClientController implements InvalidationListener {
     public MyAccountsController myAccountsController;
 
     @FXML
-    public WithdrawController withdrawController;
+    public ClientWithdrawController withdrawController;
 
     @FXML
     public ClientDepositController depositController;

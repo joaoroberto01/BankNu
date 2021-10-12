@@ -3,10 +3,13 @@ package com.jrgc.banknu.utils;
 import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.controllers.BankStatementController;
 import com.jrgc.banknu.controllers.DepositController;
+import com.jrgc.banknu.controllers.WithdrawController;
+import com.jrgc.banknu.controllers.manager.AccountDetailsController;
 import com.jrgc.banknu.controllers.manager.NewUserController;
 import com.jrgc.banknu.controllers.manager.TransferController;
 import com.jrgc.banknu.models.BankAccount;
 import com.jrgc.banknu.models.BankUser;
+import com.jrgc.banknu.models.Client;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -113,14 +116,47 @@ public class SceneManager {
         }
     }
 
-    public static void popUpTransfer(BankAccount selectedAccount) {
+    public static void popUpWithdraw(BankAccount selectedAccount) {
+        String title = String.format("Extrato - Conta %d", selectedAccount.getNumber());
+        SceneDetails sceneDetails = new SceneDetails("manager/withdraw-view.fxml", title);
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource(sceneDetails.path));
+            Parent parent = fxmlLoader.load();
+            WithdrawController withdrawController = fxmlLoader.getController();
+            withdrawController.setupAccount(selectedAccount);
+
+            showPopUpStage(parent, sceneDetails);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void popUpTransfer(Client sourceClient, BankAccount sourceAccount) {
         SceneDetails sceneDetails = new SceneDetails("manager/transfer-view.fxml", "Transferência entre contas");
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource(sceneDetails.path));
             Parent parent = fxmlLoader.load();
             TransferController transferController = fxmlLoader.getController();
-            transferController.setupAccount(selectedAccount);
+            transferController.setupSourceAccount(sourceClient, sourceAccount);
+
+            showPopUpStage(parent, sceneDetails);
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void popUpAccountDetails(BankAccount selectedAccount) {
+        String title = "Detalhes da " + selectedAccount.getAccountType();
+
+        SceneDetails sceneDetails = new SceneDetails("manager/account-details-view.fxml", title);
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource(sceneDetails.path));
+            Parent parent = fxmlLoader.load();
+            AccountDetailsController accountDetailsController = fxmlLoader.getController();
+            accountDetailsController.setupAccount(selectedAccount);
 
             showPopUpStage(parent, sceneDetails);
         }catch (IOException e){

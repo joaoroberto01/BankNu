@@ -28,13 +28,15 @@
                 </columnResizePolicy>
                 <columns>
                     <TableColumn fx:id="dateColumn" text="Data e Hora" minWidth="110" maxWidth="120" reorderable="false" sortable="false"/>
-                    <TableColumn fx:id="operationCol" text="Operação" minWidth="80" maxWidth="90" reorderable="false" sortable="false"/>
-                    <TableColumn fx:id="amountCol" text="Valor" minWidth="160" reorderable="false" sortable="false"/>
+                    <TableColumn fx:id="operationCol" text="Operação" minWidth="90" maxWidth="100" reorderable="false" sortable="false"/>
+                    <TableColumn fx:id="amountCol" text="Valor" minWidth="150" reorderable="false" sortable="false"/>
                 </columns>
             </TableView>
 
-            <HBox alignment="CENTER_RIGHT">
-                <Text fx:id="balanceText" styleClass="balance-label"  />
+            <HBox>
+                <Text fx:id="detailText" styleClass="limit-label" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Text textAlignment="RIGHT" fx:id="balanceText" styleClass="balance-label" />
             </HBox>
         </VBox>
     </center>
