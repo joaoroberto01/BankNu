@@ -19,7 +19,7 @@
     </top>
 
     <center>
-        <VBox spacing="20" BorderPane.alignment="CENTER">
+        <VBox spacing="20" alignment="CENTER">
             <VBox spacing="8">
                 <Label fx:id="valueLabel" text="Taxa da Poupança:"/>
                 <CurrencyField fx:id="limitTextField" promptText="R$"/>

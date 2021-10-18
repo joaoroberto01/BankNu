@@ -2,16 +2,11 @@ package com.jrgc.banknu.controllers;
 
 import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.utils.SceneManager;
-import com.jrgc.banknu.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class HomeController {
     @FXML

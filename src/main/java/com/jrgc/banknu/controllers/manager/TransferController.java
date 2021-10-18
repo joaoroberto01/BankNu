@@ -2,7 +2,10 @@ package com.jrgc.banknu.controllers.manager;
 
 import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.exceptions.BalanceException;
-import com.jrgc.banknu.models.*;
+import com.jrgc.banknu.models.BankAccount;
+import com.jrgc.banknu.models.BankStatementItem;
+import com.jrgc.banknu.models.Client;
+import com.jrgc.banknu.models.Manager;
 import com.jrgc.banknu.uicomponents.CurrencyField;
 import com.jrgc.banknu.utils.AlertUtils;
 import javafx.fxml.FXML;
@@ -10,7 +13,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public class TransferController {
 

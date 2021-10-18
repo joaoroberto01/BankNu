@@ -62,12 +62,12 @@ public class SceneManager {
     }
 
     public static void popUpChangePassword(){
-        SceneDetails sceneDetails = new SceneDetails("change-password-view.fxml", "Alterar Senha", 320, 250);
+        SceneDetails sceneDetails = new SceneDetails("change-password-view.fxml", "Alterar Senha", 320, 280);
         showScene(new Stage(), sceneDetails);
     }
 
     public static BankUser popUpNewUser(BankUser.UserType userType){
-        SceneDetails sceneDetails = new SceneDetails("manager/tabs/new-user-view.fxml", "Novo Usuário", 320, 250);
+        SceneDetails sceneDetails = new SceneDetails("manager/tabs/new-user-view.fxml", "Novo Usuário", 320, 240);
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource(sceneDetails.path));
@@ -102,7 +102,7 @@ public class SceneManager {
 
     public static void popUpDeposit(BankAccount selectedAccount) {
         String title = String.format("Depósito - Conta %d", selectedAccount.getNumber());
-        SceneDetails sceneDetails = new SceneDetails("manager/deposit-view.fxml", title);
+        SceneDetails sceneDetails = new SceneDetails("manager/deposit-view.fxml", title, 300, 240);
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource(sceneDetails.path));
@@ -118,7 +118,7 @@ public class SceneManager {
 
     public static void popUpWithdraw(BankAccount selectedAccount) {
         String title = String.format("Extrato - Conta %d", selectedAccount.getNumber());
-        SceneDetails sceneDetails = new SceneDetails("manager/withdraw-view.fxml", title);
+        SceneDetails sceneDetails = new SceneDetails("manager/withdraw-view.fxml", title, 300, 240);
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource(sceneDetails.path));
@@ -133,7 +133,7 @@ public class SceneManager {
     }
 
     public static void popUpTransfer(Client sourceClient, BankAccount sourceAccount) {
-        SceneDetails sceneDetails = new SceneDetails("manager/transfer-view.fxml", "Transferência entre contas");
+        SceneDetails sceneDetails = new SceneDetails("manager/transfer-view.fxml", "Transferência entre contas", 300, 350);
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource(sceneDetails.path));
@@ -150,7 +150,7 @@ public class SceneManager {
     public static void popUpAccountDetails(BankAccount selectedAccount) {
         String title = "Detalhes da " + selectedAccount.getAccountType();
 
-        SceneDetails sceneDetails = new SceneDetails("manager/account-details-view.fxml", title);
+        SceneDetails sceneDetails = new SceneDetails("manager/account-details-view.fxml", title, 320, 240);
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(BankApplication.class.getResource(sceneDetails.path));

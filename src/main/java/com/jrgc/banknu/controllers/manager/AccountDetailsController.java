@@ -1,13 +1,13 @@
 package com.jrgc.banknu.controllers.manager;
 
-import com.jrgc.banknu.models.*;
+import com.jrgc.banknu.models.BankAccount;
+import com.jrgc.banknu.models.SavingsBankAccount;
+import com.jrgc.banknu.models.SpecialBankAccount;
 import com.jrgc.banknu.uicomponents.CurrencyField;
 import com.jrgc.banknu.utils.AlertUtils;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 
 public class AccountDetailsController {
 

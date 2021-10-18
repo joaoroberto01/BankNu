@@ -18,15 +18,15 @@
                textFill="#9F3EDE"/>
     </top>
 
-    <left>
-        <VBox spacing="20" BorderPane.alignment="CENTER">
+    <center>
+        <VBox spacing="20" alignment="CENTER">
             <VBox spacing="8">
                 <Label text="Valor:"/>
                 <CurrencyField fx:id="moneyTextField" promptText="R$" />
             </VBox>
             <Button text="Sacar" onAction="#onWithdrawClick"/>
         </VBox>
-    </left>
+    </center>
 
     <stylesheets>
         <URL value="@../styles/main.css" />

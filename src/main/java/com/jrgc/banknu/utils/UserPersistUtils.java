@@ -4,8 +4,6 @@ import com.jrgc.banknu.BankApplication;
 import com.jrgc.banknu.models.BankUser;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.List;
 
 public class UserPersistUtils {

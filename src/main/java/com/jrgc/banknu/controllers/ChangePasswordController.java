@@ -24,11 +24,6 @@ public class ChangePasswordController {
         String oldPassword = EncryptUtils.toSHA1(oldPasswordField.getText());
         String newPassword = EncryptUtils.toSHA1(newPasswordField.getText());
 
-        if (!oldPassword.equals(newPassword)) {
-            errorText.setText("⚠ As senhas não coincidem");
-            errorText.setManaged(true);
-            return;
-        }
         boolean success = BankApplication.currentUser.changePassword(oldPassword, newPassword);
         errorText.setManaged(!success);
         if (!success) {

@@ -8,7 +8,6 @@ import com.jrgc.banknu.models.Client;
 import com.jrgc.banknu.uicomponents.CurrencyField;
 import com.jrgc.banknu.utils.AlertUtils;
 import javafx.fxml.FXML;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
 public class WithdrawController {

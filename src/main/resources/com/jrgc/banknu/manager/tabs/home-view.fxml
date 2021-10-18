@@ -17,8 +17,8 @@
 
     <bottom>
         <VBox spacing="8" alignment="BOTTOM_RIGHT">
-            <Button styleClass="btn-outline" text="Alterar Senha" onAction="#onPasswordClick" />
-            <Button styleClass="btn-outline" text="Logout" onAction="#onLogoutClick" />
+            <Button styleClass="btn-outline" text="Alterar Senha" prefWidth="100" onAction="#onPasswordClick" />
+            <Button styleClass="btn-logout" text="Log Out" prefWidth="100" onAction="#onLogoutClick" />
         </VBox>
     </bottom>
 </BorderPane>

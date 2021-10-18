@@ -6,18 +6,11 @@ import com.jrgc.banknu.utils.EncryptUtils;
 import com.jrgc.banknu.utils.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
-import java.util.List;
 
 public class LoginController {
     @FXML

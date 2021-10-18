@@ -18,8 +18,11 @@
 }
 
 .button:hover {
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
     -fx-background-color: #8422c4;
-    -fx-border-color: #8422c4
+    -fx-text-fill: white;
+    -fx-cursor: hand;
 }
 
 .btn-outline {
@@ -37,6 +40,21 @@
     -fx-text-fill: white;
 }
 
+.btn-logout {
+    -fx-border-width: 1.5;
+    -fx-border-color: red;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: transparent;
+    -fx-text-fill: red;
+}
+
+.btn-logout:hover {
+    -fx-background-color: red;
+    -fx-border-color: red;
+    -fx-text-fill: white;
+}
+
 .tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
      -fx-border-width: 0;
 }
@@ -46,15 +64,21 @@
 }
 
 .tab .tab-label {
+    -fx-text-fill: white;
     -fx-font-family: Helvetica;
     -fx-font-weight: bold;
 }
 
-.tab-pane .tab:selected{
-    -fx-background-color: #8f37c7;
+.tab-pane .tab {
+    -fx-background-color: #9F3EDE;
 }
+
+.tab-pane .tab:selected{
+    -fx-background-color: white;
+}
+
 .tab-pane .tab:selected .tab-label {
-    -fx-text-fill: white;
+    -fx-text-fill: #9F3EDE;
     -fx-font-family: Helvetica;
     -fx-font-weight: bold;
 }

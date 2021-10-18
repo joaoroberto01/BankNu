@@ -19,19 +19,15 @@
     </top>
 
     <center>
-        <VBox spacing="20" BorderPane.alignment="CENTER">
-            <padding>
-                <Insets topRightBottomLeft="20.0"/>
-            </padding>
-
+        <VBox spacing="20" alignment="CENTER">
             <VBox spacing="8">
                 <Label text="Selecione o cliente destino:"/>
-                <ChoiceBox fx:id="clientChoiceBox" prefWidth="180" onAction="#onClientSelect"/>
+                <ChoiceBox fx:id="clientChoiceBox" prefWidth="300" onAction="#onClientSelect"/>
             </VBox>
 
             <VBox spacing="8">
                 <Label text="Selecione a conta destino:"/>
-                <ChoiceBox fx:id="destinationAccountChoiceBox" prefWidth="180" />
+                <ChoiceBox fx:id="destinationAccountChoiceBox" prefWidth="300" />
             </VBox>
 
             <VBox spacing="8">

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BankApplication extends javafx.application.Application {
-
     public static List<BankUser> bankUsers = new ArrayList<>();
     public static BankUser currentUser;
 

@@ -16,18 +16,21 @@
         <Label BorderPane.alignment="CENTER" textAlignment="CENTER" styleClass="title" text="Saque" />
     </top>
 
-    <left>
-        <VBox spacing="20">
+    <center>
+        <VBox spacing="20" alignment="CENTER">
+            <BorderPane.margin>
+                <Insets left="120" right="120" bottom="120" />
+            </BorderPane.margin>
             <VBox spacing="8">
                 <Label text="Selecione uma conta:"/>
-                <ChoiceBox fx:id="accountsChoiceBox"/>
+                <ChoiceBox fx:id="accountsChoiceBox" prefWidth="240"/>
             </VBox>
             <VBox spacing="8">
                 <Label text="Valor:"/>
                 <CurrencyField fx:id="moneyTextField" promptText="R$" />
             </VBox>
-            <Button text="Sacar" onAction="#onWithdrawClick"/>
+            <Button text="Sacar" onAction="#onWithdrawClick" />
         </VBox>
-    </left>
+    </center>
 
 </BorderPane>

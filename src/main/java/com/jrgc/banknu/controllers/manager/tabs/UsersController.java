@@ -1,21 +1,16 @@
 package com.jrgc.banknu.controllers.manager.tabs;
 
 import com.jrgc.banknu.BankApplication;
-import com.jrgc.banknu.controllers.manager.NewUserController;
-import com.jrgc.banknu.models.*;
+import com.jrgc.banknu.models.BankUser;
+import com.jrgc.banknu.models.Manager;
+import com.jrgc.banknu.utils.AlertUtils;
 import com.jrgc.banknu.utils.SceneManager;
 import com.jrgc.banknu.utils.UserPersistUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
 import javafx.util.Callback;
-
-import java.io.IOException;
 
 public class UsersController {
 
@@ -70,6 +65,11 @@ public class UsersController {
 
     private void delete(){
         BankUser deleteUser = usersTableView.getSelectionModel().getSelectedItem();
+        if (deleteUser.equals(BankApplication.currentUser)){
+            AlertUtils.showError("Não é possível remover o próprio usuário!");
+            return;
+        }
+
         BankApplication.bankUsers.remove(deleteUser);
 
         for (BankUser bankUser : BankApplication.bankUsers){

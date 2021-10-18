@@ -1,14 +1,10 @@
 package com.jrgc.banknu.controllers.manager.tabs;
 
 import com.jrgc.banknu.BankApplication;
-import com.jrgc.banknu.models.*;
+import com.jrgc.banknu.models.BankAccount;
+import com.jrgc.banknu.models.Client;
+import com.jrgc.banknu.models.Manager;
 import com.jrgc.banknu.utils.SceneManager;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -126,6 +122,7 @@ public class MyClientsController {
             SceneManager.popUpTransfer(client, selectedAccount);
             listCell.getListView().refresh();
         });
+        transferMenuItem.setDisable(clients.size() < 2);
 
         menu.getItems().addAll(bankStatementMenuItem, depositMenuItem, withdrawMenuItem, transferMenuItem);
 
